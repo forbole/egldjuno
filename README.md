@@ -10,7 +10,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/HarleyAppleChoi/junomum)](https://goreportcard.com/report/github.com/HarleyAppleChoi/junomum)
 [![Codecov](https://img.shields.io/codecov/c/github/HarleyAppleChoi/junomum)](https://codecov.io/gh/HarleyAppleChoi/junomum/branch/cosmos-v0.40.x) -->
 
-> junomum is a Flow blockchain data aggregator and exporter that provides the ability for developers and clients to query for indexed chain data.
+> junomum is a template for blockchain data aggregator and exporter that provides the ability for developers and clients to query for indexed chain data.
 
 ## Table of Contents
   - [Background](#background)
