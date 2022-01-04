@@ -1,4 +1,4 @@
-module github.com/forbole/flowJuno
+module github.com/HarleyAppleChoi/junomum
 
 go 1.13
 

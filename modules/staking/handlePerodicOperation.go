@@ -6,13 +6,13 @@ import (
 	"github.com/go-co-op/gocron"
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/flowJuno/modules/staking/stakingutils"
+	"github.com/HarleyAppleChoi/junomum/modules/staking/stakingutils"
 
-	"github.com/forbole/flowJuno/client"
-	"github.com/forbole/flowJuno/modules/utils"
+	"github.com/HarleyAppleChoi/junomum/client"
+	"github.com/HarleyAppleChoi/junomum/modules/utils"
 
-	database "github.com/forbole/flowJuno/db/postgresql"
-	db "github.com/forbole/flowJuno/db/postgresql"
+	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	db "github.com/HarleyAppleChoi/junomum/db/postgresql"
 )
 
 func RegisterPeriodicOps(scheduler *gocron.Scheduler, db *database.Db, flowClient client.Proxy) error {

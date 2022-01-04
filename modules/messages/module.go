@@ -4,9 +4,9 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 
-	"github.com/forbole/flowJuno/db"
-	"github.com/forbole/flowJuno/modules/modules"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/db"
+	"github.com/HarleyAppleChoi/junomum/modules/modules"
+	"github.com/HarleyAppleChoi/junomum/types"
 )
 
 var _ modules.Module = &Module{}

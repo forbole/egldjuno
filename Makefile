@@ -9,23 +9,23 @@ all: lint test-unit install
 # Build / Install
 ###############################################################################
 
-LD_FLAGS = -X github.com/forbole/flowJuno.Version=$(VERSION) \
-	-X github.com/forbole/flowJuno.Commit=$(COMMIT)
+LD_FLAGS = -X github.com/HarleyAppleChoi/junomum.Version=$(VERSION) \
+	-X github.com/HarleyAppleChoi/junomum.Commit=$(COMMIT)
 
 BUILD_FLAGS := -ldflags '$(LD_FLAGS)'
 
 build: go.sum
 ifeq ($(OS),Windows_NT)
-	@echo "building flowjuno binary..."
-	@go build -mod=readonly $(BUILD_FLAGS) -o build/flowjuno.exe ./cmd/flowjuno
+	@echo "building junomum binary..."
+	@go build -mod=readonly $(BUILD_FLAGS) -o build/junomum.exe ./cmd/junomum
 else
-	@echo "building flowjuno binary..."
-	@go build -mod=readonly $(BUILD_FLAGS) -o build/flowjuno ./cmd/flowjuno
+	@echo "building junomum binary..."
+	@go build -mod=readonly $(BUILD_FLAGS) -o build/junomum ./cmd/junomum
 endif
 
 install: go.sum
-	@echo "installing flowjuno binary..."
-	@go install -mod=readonly $(BUILD_FLAGS) ./cmd/flowjuno
+	@echo "installing junomum binary..."
+	@go install -mod=readonly $(BUILD_FLAGS) ./cmd/junomum
 
 
 
@@ -63,7 +63,7 @@ lint-fix:
 format:
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs gofmt -w -s
 	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs misspell -w
-	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/forbole/flowJuno
+	find . -name '*.go' -type f -not -path "./vendor*" -not -path "*.git*" -not -name '*.pb.go' | xargs goimports -w -local github.com/HarleyAppleChoi/junomum
 .PHONY: format
 
 clean:

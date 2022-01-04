@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/forbole/flowJuno/types/config"
+	"github.com/HarleyAppleChoi/junomum/types/config"
 	"github.com/onflow/flow-go-sdk"
 
-	database "github.com/forbole/flowJuno/db/postgresql"
-	"github.com/forbole/flowJuno/types"
+	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	"github.com/HarleyAppleChoi/junomum/types"
 
 	juno "github.com/desmos-labs/juno/types"
 

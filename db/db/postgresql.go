@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/forbole/flowJuno/logging"
+	"github.com/HarleyAppleChoi/junomum/logging"
 
 	"github.com/onflow/flow-go-sdk"
 	"github.com/rs/zerolog/log"
@@ -13,8 +13,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 	"github.com/lib/pq"
 
-	"github.com/forbole/flowJuno/db"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/db"
+	"github.com/HarleyAppleChoi/junomum/types"
 )
 
 // Builder creates a database connection with the given database connection info

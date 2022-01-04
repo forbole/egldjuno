@@ -5,7 +5,7 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	db "github.com/forbole/flowJuno/db/postgresql"
+	db "github.com/HarleyAppleChoi/junomum/db/postgresql"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 )

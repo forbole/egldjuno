@@ -5,10 +5,10 @@ import (
 	"os"
 	"path"
 
-	initcmd "github.com/forbole/flowJuno/cmd/init"
-	parsecmd "github.com/forbole/flowJuno/cmd/parse"
+	initcmd "github.com/HarleyAppleChoi/junomum/cmd/init"
+	parsecmd "github.com/HarleyAppleChoi/junomum/cmd/parse"
 
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/types"
 
 	"github.com/spf13/cobra"
 	"github.com/tendermint/tendermint/libs/cli"

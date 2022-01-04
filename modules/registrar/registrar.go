@@ -3,14 +3,14 @@ package registrar
 import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/forbole/flowJuno/logging"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/logging"
+	"github.com/HarleyAppleChoi/junomum/types"
 
-	"github.com/forbole/flowJuno/modules/messages"
-	"github.com/forbole/flowJuno/modules/modules"
+	"github.com/HarleyAppleChoi/junomum/modules/messages"
+	"github.com/HarleyAppleChoi/junomum/modules/modules"
 
-	"github.com/forbole/flowJuno/client"
-	"github.com/forbole/flowJuno/db"
+	"github.com/HarleyAppleChoi/junomum/client"
+	"github.com/HarleyAppleChoi/junomum/db"
 )
 
 // Registrar represents a modules registrar. This allows to build a list of modules that can later be used by
@@ -35,7 +35,7 @@ func (*EmptyRegistrar) BuildModules(
 
 // ------------------------------------------------------------------------------------------------------------------
 
-// DefaultRegistrar represents a registrar that allows to handle the default flowjuno modules
+// DefaultRegistrar represents a registrar that allows to handle the default junomum modules
 type DefaultRegistrar struct {
 	parser messages.MessageAddressesParser
 }

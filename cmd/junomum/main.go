@@ -3,19 +3,19 @@ package main
 import (
 	"os"
 
-	"github.com/forbole/flowJuno/cmd/parse"
+	"github.com/HarleyAppleChoi/junomum/cmd/parse"
 
-	"github.com/forbole/flowJuno/modules/messages"
+	"github.com/HarleyAppleChoi/junomum/modules/messages"
 
-	"github.com/forbole/flowJuno/cmd"
-	database "github.com/forbole/flowJuno/db/postgresql"
-	"github.com/forbole/flowJuno/modules"
-	"github.com/forbole/flowJuno/types/config"
+	"github.com/HarleyAppleChoi/junomum/cmd"
+	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	"github.com/HarleyAppleChoi/junomum/modules"
+	"github.com/HarleyAppleChoi/junomum/types/config"
 )
 
 func main() {
 	// Config the runner
-	config := cmd.NewConfig("flowjuno").
+	config := cmd.NewConfig("junomum").
 		WithParseConfig(parse.NewConfig().
 			WithConfigParser(config.ParseConfig).
 			WithDBBuilder(database.Builder).

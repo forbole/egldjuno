@@ -6,9 +6,9 @@ import (
 	"github.com/go-co-op/gocron"
 	"github.com/rs/zerolog/log"
 
-	database "github.com/forbole/flowJuno/db/postgresql"
-	consutils "github.com/forbole/flowJuno/modules/consensus/utils"
-	"github.com/forbole/flowJuno/modules/utils"
+	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	consutils "github.com/HarleyAppleChoi/junomum/modules/consensus/utils"
+	"github.com/HarleyAppleChoi/junomum/modules/utils"
 )
 
 // Register registers the utils that should be run periodically

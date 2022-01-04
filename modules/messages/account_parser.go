@@ -9,7 +9,7 @@ import (
 	   	ibctransfertypes "github.com/cosmos/cosmos-sdk/x/ibc/applications/transfer/types"
 	   	slashingtypes "github.com/cosmos/cosmos-sdk/x/slashing/types" */
 
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/types"
 
 	"github.com/cosmos/cosmos-sdk/codec"
 	/*	sdk "github.com/cosmos/cosmos-sdk/types"

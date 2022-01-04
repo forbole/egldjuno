@@ -10,13 +10,13 @@ import (
 
 	"github.com/go-co-op/gocron"
 
-	"github.com/forbole/flowJuno/client"
-	"github.com/forbole/flowJuno/logging"
-	"github.com/forbole/flowJuno/modules/modules"
-	"github.com/forbole/flowJuno/types"
-	"github.com/forbole/flowJuno/worker"
+	"github.com/HarleyAppleChoi/junomum/client"
+	"github.com/HarleyAppleChoi/junomum/logging"
+	"github.com/HarleyAppleChoi/junomum/modules/modules"
+	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/HarleyAppleChoi/junomum/worker"
 
-	"github.com/forbole/flowJuno/db"
+	"github.com/HarleyAppleChoi/junomum/db"
 
 	"github.com/spf13/cobra"
 )

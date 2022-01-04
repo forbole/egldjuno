@@ -3,8 +3,8 @@ package utils
 import (
 	"fmt"
 
-	database "github.com/forbole/flowJuno/db/postgresql"
-	"github.com/forbole/flowJuno/types"
+	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	"github.com/HarleyAppleChoi/junomum/types"
 	"github.com/onflow/flow-go-sdk"
 )
 

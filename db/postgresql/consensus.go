@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/types"
 
-	dbtypes "github.com/forbole/flowJuno/db/types"
+	dbtypes "github.com/HarleyAppleChoi/junomum/db/types"
 )
 
 // -------------------------------------------------------------------------------------------------------------------

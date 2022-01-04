@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/types"
 )
 
 func (suite *AuthProxyTestSuite) TestProxy_GetLockedAccountAddress() {

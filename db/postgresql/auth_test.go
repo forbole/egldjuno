@@ -6,8 +6,8 @@ import (
 	"github.com/onflow/flow-go-sdk"
 	"github.com/onflow/flow-go-sdk/crypto"
 
-	dbtypes "github.com/forbole/flowJuno/db/types"
-	"github.com/forbole/flowJuno/types"
+	dbtypes "github.com/HarleyAppleChoi/junomum/db/types"
+	"github.com/HarleyAppleChoi/junomum/types"
 )
 
 func (suite *DbTestSuite) AddAccount(address string) error {

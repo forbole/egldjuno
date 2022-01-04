@@ -3,8 +3,8 @@ package utils
 import (
 	"testing"
 
-	"github.com/forbole/flowJuno/client"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/client"
+	"github.com/HarleyAppleChoi/junomum/types"
 	"github.com/stretchr/testify/suite"
 
 	_ "github.com/proullon/ramsql/driver"

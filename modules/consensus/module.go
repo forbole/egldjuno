@@ -2,14 +2,14 @@ package consensus
 
 import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
-	"github.com/forbole/flowJuno/modules/messages"
-	"github.com/forbole/flowJuno/modules/modules"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/modules/messages"
+	"github.com/HarleyAppleChoi/junomum/modules/modules"
+	"github.com/HarleyAppleChoi/junomum/types"
 	"github.com/go-co-op/gocron"
 	"github.com/onflow/flow-go-sdk"
 
-	"github.com/forbole/flowJuno/client"
-	db "github.com/forbole/flowJuno/db/postgresql"
+	"github.com/HarleyAppleChoi/junomum/client"
+	db "github.com/HarleyAppleChoi/junomum/db/postgresql"
 )
 
 var (

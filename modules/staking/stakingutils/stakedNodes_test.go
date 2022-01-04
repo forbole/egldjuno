@@ -1,6 +1,6 @@
 package stakingutils
 
-import "github.com/forbole/flowJuno/types"
+import "github.com/HarleyAppleChoi/junomum/types"
 
 func (suite *StakingProxyTestSuite) TestStakingProxy_getNodeTotalCommitment() {
 	proxy := *suite.Proxy

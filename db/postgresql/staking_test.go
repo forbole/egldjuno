@@ -3,8 +3,8 @@ package postgresql_test
 import (
 	"fmt"
 
-	dbtypes "github.com/forbole/flowJuno/db/types"
-	"github.com/forbole/flowJuno/types"
+	dbtypes "github.com/HarleyAppleChoi/junomum/db/types"
+	"github.com/HarleyAppleChoi/junomum/types"
 	"github.com/lib/pq"
 )
 

@@ -4,13 +4,13 @@ import (
 	"github.com/cosmos/cosmos-sdk/simapp"
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/forbole/flowJuno/client"
-	"github.com/forbole/flowJuno/db"
-	"github.com/forbole/flowJuno/db/builder"
-	"github.com/forbole/flowJuno/logging"
-	"github.com/forbole/flowJuno/modules/modules"
-	"github.com/forbole/flowJuno/modules/registrar"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/client"
+	"github.com/HarleyAppleChoi/junomum/db"
+	"github.com/HarleyAppleChoi/junomum/db/builder"
+	"github.com/HarleyAppleChoi/junomum/logging"
+	"github.com/HarleyAppleChoi/junomum/modules/modules"
+	"github.com/HarleyAppleChoi/junomum/modules/registrar"
+	"github.com/HarleyAppleChoi/junomum/types"
 )
 
 // Config contains all the configuration for the "parse" command

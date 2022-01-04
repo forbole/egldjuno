@@ -3,22 +3,22 @@ package worker
 import (
 	"fmt"
 
-	"github.com/forbole/flowJuno/logging"
+	"github.com/HarleyAppleChoi/junomum/logging"
 	"github.com/onflow/flow-go-sdk"
 
 	tmjson "github.com/tendermint/tendermint/libs/json"
 
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/forbole/flowJuno/modules/modules"
+	"github.com/HarleyAppleChoi/junomum/modules/modules"
 
 	"github.com/rs/zerolog/log"
 	tmos "github.com/tendermint/tendermint/libs/os"
 	tmtypes "github.com/tendermint/tendermint/types"
 
-	"github.com/forbole/flowJuno/client"
-	"github.com/forbole/flowJuno/db"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/client"
+	"github.com/HarleyAppleChoi/junomum/db"
+	"github.com/HarleyAppleChoi/junomum/types"
 )
 
 // Worker defines a job consumer that is responsible for getting and

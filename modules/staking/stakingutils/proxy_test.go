@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/suite"
 
-	testutils "github.com/forbole/flowJuno/modules/utils"
+	testutils "github.com/HarleyAppleChoi/junomum/modules/utils"
 	_ "github.com/proullon/ramsql/driver"
 )
 

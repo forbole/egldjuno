@@ -6,14 +6,14 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/types"
 	"github.com/onflow/cadence"
 	"github.com/onflow/flow-go-sdk"
 
-	"github.com/forbole/flowJuno/client"
-	"github.com/forbole/flowJuno/modules/utils"
+	"github.com/HarleyAppleChoi/junomum/client"
+	"github.com/HarleyAppleChoi/junomum/modules/utils"
 
-	database "github.com/forbole/flowJuno/db/postgresql"
+	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
 )
 
 // GetDataFromNodeID get all data that need staker node info as parameter and save it into database

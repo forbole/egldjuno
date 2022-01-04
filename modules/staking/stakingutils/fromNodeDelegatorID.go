@@ -5,13 +5,13 @@ import (
 
 	"github.com/rs/zerolog/log"
 
-	"github.com/forbole/flowJuno/modules/utils"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/modules/utils"
+	"github.com/HarleyAppleChoi/junomum/types"
 	"github.com/onflow/cadence"
 
-	"github.com/forbole/flowJuno/client"
+	"github.com/HarleyAppleChoi/junomum/client"
 
-	database "github.com/forbole/flowJuno/db/postgresql"
+	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
 )
 
 // GetDataFromNodeDelegatorID get all data that need staker node info as input and

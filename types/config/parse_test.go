@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/forbole/flowJuno/types/config"
+	"github.com/HarleyAppleChoi/junomum/types/config"
 )
 
 func TestParseConfig(t *testing.T) {

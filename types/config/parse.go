@@ -1,7 +1,7 @@
 package config
 
 import (
-	juno "github.com/forbole/flowJuno/types"
+	juno "github.com/HarleyAppleChoi/junomum/types"
 	"github.com/pelletier/go-toml"
 )
 

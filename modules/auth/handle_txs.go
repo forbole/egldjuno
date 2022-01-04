@@ -2,12 +2,12 @@ package auth
 
 import (
 	"github.com/cosmos/cosmos-sdk/codec"
-	"github.com/forbole/flowJuno/modules/messages"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/modules/messages"
+	"github.com/HarleyAppleChoi/junomum/types"
 
-	"github.com/forbole/flowJuno/client"
-	db "github.com/forbole/flowJuno/db/postgresql"
-	authutils "github.com/forbole/flowJuno/modules/auth/utils"
+	"github.com/HarleyAppleChoi/junomum/client"
+	db "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	authutils "github.com/HarleyAppleChoi/junomum/modules/auth/utils"
 )
 
 // HandleEvent handles any message updating the involved accounts

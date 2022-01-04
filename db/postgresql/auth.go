@@ -3,10 +3,10 @@ package postgresql
 import (
 	"fmt"
 
-	dbtypes "github.com/forbole/flowJuno/db/types"
-	"github.com/forbole/flowJuno/db/utils"
-	dbutils "github.com/forbole/flowJuno/db/utils"
-	"github.com/forbole/flowJuno/types"
+	dbtypes "github.com/HarleyAppleChoi/junomum/db/types"
+	"github.com/HarleyAppleChoi/junomum/db/utils"
+	dbutils "github.com/HarleyAppleChoi/junomum/db/utils"
+	"github.com/HarleyAppleChoi/junomum/types"
 )
 
 // SaveAccounts saves the given accounts inside the database

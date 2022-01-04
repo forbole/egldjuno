@@ -3,11 +3,11 @@ package consensus
 import (
 	"fmt"
 
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/types"
 	"github.com/onflow/flow-go-sdk"
 
-	"github.com/forbole/flowJuno/client"
-	db "github.com/forbole/flowJuno/db/postgresql"
+	"github.com/HarleyAppleChoi/junomum/client"
+	db "github.com/HarleyAppleChoi/junomum/db/postgresql"
 	"github.com/rs/zerolog/log"
 )
 

@@ -3,7 +3,7 @@ package db
 import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/types"
 	"github.com/onflow/flow-go-sdk"
 )
 

@@ -2,20 +2,20 @@ package modules
 
 import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
-	"github.com/forbole/flowJuno/client"
-	"github.com/forbole/flowJuno/db"
-	"github.com/forbole/flowJuno/db/postgresql"
+	"github.com/HarleyAppleChoi/junomum/client"
+	"github.com/HarleyAppleChoi/junomum/db"
+	"github.com/HarleyAppleChoi/junomum/db/postgresql"
 
-	"github.com/forbole/flowJuno/modules/messages"
-	"github.com/forbole/flowJuno/modules/modules"
-	"github.com/forbole/flowJuno/modules/registrar"
-	"github.com/forbole/flowJuno/types"
+	"github.com/HarleyAppleChoi/junomum/modules/messages"
+	"github.com/HarleyAppleChoi/junomum/modules/modules"
+	"github.com/HarleyAppleChoi/junomum/modules/registrar"
+	"github.com/HarleyAppleChoi/junomum/types"
 
-	"github.com/forbole/flowJuno/modules/auth"
-	"github.com/forbole/flowJuno/modules/consensus"
-	"github.com/forbole/flowJuno/modules/staking"
-	"github.com/forbole/flowJuno/modules/telemetry"
-	"github.com/forbole/flowJuno/modules/token"
+	"github.com/HarleyAppleChoi/junomum/modules/auth"
+	"github.com/HarleyAppleChoi/junomum/modules/consensus"
+	"github.com/HarleyAppleChoi/junomum/modules/staking"
+	"github.com/HarleyAppleChoi/junomum/modules/telemetry"
+	"github.com/HarleyAppleChoi/junomum/modules/token"
 )
 
 var (
