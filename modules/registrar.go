@@ -1,10 +1,10 @@
 package modules
 
 import (
-	"github.com/cosmos/cosmos-sdk/simapp/params"
 	"github.com/HarleyAppleChoi/junomum/client"
 	"github.com/HarleyAppleChoi/junomum/db"
 	"github.com/HarleyAppleChoi/junomum/db/postgresql"
+	"github.com/cosmos/cosmos-sdk/simapp/params"
 
 	"github.com/HarleyAppleChoi/junomum/modules/messages"
 	"github.com/HarleyAppleChoi/junomum/modules/modules"
@@ -13,9 +13,7 @@ import (
 
 	"github.com/HarleyAppleChoi/junomum/modules/auth"
 	"github.com/HarleyAppleChoi/junomum/modules/consensus"
-	"github.com/HarleyAppleChoi/junomum/modules/staking"
 	"github.com/HarleyAppleChoi/junomum/modules/telemetry"
-	"github.com/HarleyAppleChoi/junomum/modules/token"
 )
 
 var (
@@ -45,8 +43,6 @@ func (r *Registrar) BuildModules(
 		messages.NewModule(r.parser, encodingConfig.Marshaler, database),
 		auth.NewModule(r.parser, *cp, encodingConfig, bigDipperBd),
 		consensus.NewModule(r.parser, *cp, encodingConfig, bigDipperBd),
-		staking.NewModule(r.parser, *cp, encodingConfig, bigDipperBd),
-		token.NewModule(r.parser, *cp, encodingConfig, bigDipperBd),
 		telemetry.NewModule(cfg, r.parser, *cp, encodingConfig, bigDipperBd),
 	}
 }
