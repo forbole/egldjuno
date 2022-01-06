@@ -4,7 +4,7 @@
 
 ![banner](.docs/.img/logo.png)
 
-> This branch is intended to be used with Flow Go SDK.
+> This branch is intended to be used with Elrond.
 
 <!-- [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/forbole/egldjuno/Tests)](https://github.com/forbole/egldjuno/actions?query=workflow%3ATests)
 [![Go Report Card](https://goreportcard.com/badge/github.com/forbole/egldjuno)](https://goreportcard.com/report/github.com/forbole/egldjuno)
