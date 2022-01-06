@@ -1,10 +1,10 @@
 <div align="center">
-  <h1> junomum </h1>
+  <h1> egldjuno </h1>
 </div>
 
 ![banner](.docs/.img/logo.png)
 
-> This branch is intended to be used with Flow Go SDK.
+> This branch is intended to be used with Elrond.
 
 <!-- [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/HarleyAppleChoi/junomum/Tests)](https://github.com/HarleyAppleChoi/junomum/actions?query=workflow%3ATests)
 [![Go Report Card](https://goreportcard.com/badge/github.com/HarleyAppleChoi/junomum)](https://goreportcard.com/report/github.com/HarleyAppleChoi/junomum)
