@@ -3,6 +3,7 @@ package client
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 
 	"github.com/rs/zerolog/log"
 
@@ -15,6 +16,8 @@ import (
 
 	"github.com/onflow/flow-go-sdk"
 	"github.com/onflow/flow-go-sdk/client"
+	"github.com/ElrondNetwork/elrond-sdk-erdgo/blockchain"
+
 )
 
 // Proxy implements a wrapper around both a Tendermint RPC client and a
@@ -24,7 +27,7 @@ type Proxy struct {
 	encodingConfig *params.EncodingConfig
 	contract       Contracts
 
-	flowClient client.Client
+	flowClient *blockchain.elrondProxy
 
 	grpConnection   *grpc.ClientConn
 	txServiceClient tx.ServiceClient
@@ -33,22 +36,16 @@ type Proxy struct {
 
 // NewClientProxy allows to build a new Proxy instance
 func NewClientProxy(cfg types.Config, encodingConfig *params.EncodingConfig) (*Proxy, error) {
-	flowClient, err := client.New(cfg.GetRPCConfig().GetAddress(), grpc.WithInsecure())
-	if err != nil {
-		return nil, err
-	}
+	client:=cfg.GetRPCConfig().GetAddress()
+	proxy := blockchain.NewElrondProxy(client, nil)
 
-	contracts := MainnetContracts()
-	if cfg.GetRPCConfig().GetContracts() == "Mainnet" {
-		contracts = MainnetContracts()
-	} else if cfg.GetRPCConfig().GetContracts() == "Testnet" {
-		contracts = TestnetContracts()
-	}
+
+
 
 	return &Proxy{
 		encodingConfig:  encodingConfig,
 		ctx:             context.Background(),
-		flowClient:      *flowClient,
+		flowClient:      client,
 		grpConnection:   nil,
 		txServiceClient: nil,
 		contract:        contracts,
