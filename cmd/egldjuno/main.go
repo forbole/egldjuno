@@ -3,19 +3,19 @@ package main
 import (
 	"os"
 
-	"github.com/HarleyAppleChoi/junomum/cmd/parse"
+	"github.com/forbole/egldjuno/cmd/parse"
 
-	"github.com/HarleyAppleChoi/junomum/modules/messages"
+	"github.com/forbole/egldjuno/modules/messages"
 
-	"github.com/HarleyAppleChoi/junomum/cmd"
-	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
-	"github.com/HarleyAppleChoi/junomum/modules"
-	"github.com/HarleyAppleChoi/junomum/types/config"
+	"github.com/forbole/egldjuno/cmd"
+	database "github.com/forbole/egldjuno/db/postgresql"
+	"github.com/forbole/egldjuno/modules"
+	"github.com/forbole/egldjuno/types/config"
 )
 
 func main() {
 	// Config the runner
-	config := cmd.NewConfig("junomum").
+	config := cmd.NewConfig("egldjuno").
 		WithParseConfig(parse.NewConfig().
 			WithConfigParser(config.ParseConfig).
 			WithDBBuilder(database.Builder).

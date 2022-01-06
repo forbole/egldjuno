@@ -6,8 +6,8 @@ import (
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/gogo/protobuf/proto"
 
-	"github.com/HarleyAppleChoi/junomum/db"
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/db"
+	"github.com/forbole/egldjuno/types"
 )
 
 // HandleEvent represents a message handler that stores the given message inside the proper database table

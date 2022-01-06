@@ -3,13 +3,13 @@ package consensus
 import (
 	"github.com/rs/zerolog/log"
 
-	"github.com/HarleyAppleChoi/junomum/modules/messages"
+	"github.com/forbole/egldjuno/modules/messages"
 	"github.com/onflow/flow-go-sdk"
 
-	"github.com/HarleyAppleChoi/junomum/client"
-	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
-	db "github.com/HarleyAppleChoi/junomum/db/postgresql"
-	consutils "github.com/HarleyAppleChoi/junomum/modules/consensus/utils"
+	"github.com/forbole/egldjuno/client"
+	database "github.com/forbole/egldjuno/db/postgresql"
+	db "github.com/forbole/egldjuno/db/postgresql"
+	consutils "github.com/forbole/egldjuno/modules/consensus/utils"
 )
 
 func HandleBlock(block *flow.Block, _ messages.MessageAddressesParser, db *db.Db, height int64, flowClient client.Proxy) error {

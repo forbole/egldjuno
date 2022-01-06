@@ -3,9 +3,9 @@ package parse
 import (
 	"fmt"
 
-	"github.com/HarleyAppleChoi/junomum/client"
-	modsregistrar "github.com/HarleyAppleChoi/junomum/modules/registrar"
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/client"
+	modsregistrar "github.com/forbole/egldjuno/modules/registrar"
+	"github.com/forbole/egldjuno/types"
 )
 
 // SetupParsing setups all the things that should be later passed to StartParsing in order

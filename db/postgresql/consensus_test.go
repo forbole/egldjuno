@@ -3,8 +3,8 @@ package postgresql_test
 import (
 	time "time"
 
-	dbtypes "github.com/HarleyAppleChoi/junomum/db/types"
-	"github.com/HarleyAppleChoi/junomum/types"
+	dbtypes "github.com/forbole/egldjuno/db/types"
+	"github.com/forbole/egldjuno/types"
 )
 
 func (suite *DbTestSuite) TestSaveConsensus_GetBlockHeightTimeMinuteAgo() {

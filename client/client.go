@@ -4,20 +4,22 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"time"
+	"bytes"
+
 
 	"github.com/rs/zerolog/log"
 
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 	"github.com/cosmos/cosmos-sdk/types/tx"
-
-	"github.com/HarleyAppleChoi/junomum/types"
+	"net/http"
+	"github.com/forbole/egldjuno/types"
 
 	"google.golang.org/grpc"
 
 	"github.com/onflow/flow-go-sdk"
 	"github.com/onflow/flow-go-sdk/client"
-	"github.com/ElrondNetwork/elrond-sdk-erdgo/blockchain"
-
 )
 
 // Proxy implements a wrapper around both a Tendermint RPC client and a
@@ -25,32 +27,70 @@ import (
 type Proxy struct {
 	ctx            context.Context
 	encodingConfig *params.EncodingConfig
-	contract       Contracts
-
-	flowClient *blockchain.elrondProxy
-
+	apiClient *httpClient
 	grpConnection   *grpc.ClientConn
 	txServiceClient tx.ServiceClient
 	genesisHeight   uint64
 }
 
+type httpClient struct{
+	Client *http.Client
+	ApiAdress string
+}
+
 // NewClientProxy allows to build a new Proxy instance
 func NewClientProxy(cfg types.Config, encodingConfig *params.EncodingConfig) (*Proxy, error) {
-	client:=cfg.GetRPCConfig().GetAddress()
-	proxy := blockchain.NewElrondProxy(client, nil)
-
-
-
+	address:=cfg.GetRPCConfig().GetAddress()
+	client := &http.Client{Timeout: 10 * time.Second}
+	
+	httpClient  := &httpClient{
+		Client:client,
+		ApiAdress:address,
+	}
 
 	return &Proxy{
 		encodingConfig:  encodingConfig,
 		ctx:             context.Background(),
-		flowClient:      client,
+		apiClient:       httpClient,
 		grpConnection:   nil,
 		txServiceClient: nil,
-		contract:        contracts,
 		genesisHeight:   cfg.GetCosmosConfig().GetGenesisHeight(),
 	}, nil
+}
+
+// QueryLCD queries the LCD at the given endpoint, and deserializes the result into the given pointer.
+// If an error is raised, returns the error.
+func (cp Proxy) restRequestGet(endpoint string,values map[string]string)([]byte,error) {
+	jsonData, err := json.Marshal(values)
+
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/%s",cp.apiClient.ApiAdress,endpoint), bytes.NewBuffer(jsonData))
+	if err != nil {
+		return nil,err
+	}
+
+	response, err := cp.apiClient.Client.Do(req)
+	if err != nil {
+		return nil,err
+	}
+
+	// Close the connection to reuse it
+	defer response.Body.Close()
+
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		return nil,err
+	}
+
+	return body,nil
+}
+
+func (cp Proxy) RestRequestGetDecoded(endpoint string,values map[string]string,ptr interface{})error{
+	bz,err:= cp.restRequestGet(endpoint,values)
+	if err!=nil{
+		return err
+	}
+	
+	return json.Unmarshal(bz, &ptr)
 }
 
 // GetGeneisisBlock parse the specific block as genesis block
@@ -126,17 +166,6 @@ func (cp *Proxy) NodeOperators(height int64) (*types.NodeOperators, error) {
 	return &nodeOperators, nil
 } */
 
-func (cp *Proxy) Client() *client.Client {
-	return &cp.flowClient
-}
-
-func (cp *Proxy) Ctx() context.Context {
-	return cp.ctx
-}
-
-func (cp *Proxy) Contract() Contracts {
-	return cp.contract
-}
 
 func (cp *Proxy) GetChainID() string {
 	// There is GetNetworkParameters rpc method that not implenment yet in flow-go-sdk.

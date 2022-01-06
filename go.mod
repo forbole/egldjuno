@@ -1,4 +1,4 @@
-module github.com/HarleyAppleChoi/junomum
+module github.com/forbole/egldjuno
 
 go 1.13
 

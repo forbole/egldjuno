@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/types"
 )
 
 const (

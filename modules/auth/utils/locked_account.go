@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/HarleyAppleChoi/junomum/client"
-	"github.com/HarleyAppleChoi/junomum/modules/utils"
+	"github.com/forbole/egldjuno/client"
+	"github.com/forbole/egldjuno/modules/utils"
 	"github.com/onflow/cadence"
 	"github.com/onflow/flow-go-sdk"
 
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/types"
 )
 
 // GetLockedAccountBalance return information of an array of locked token accounts

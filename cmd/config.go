@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	initcmd "github.com/HarleyAppleChoi/junomum/cmd/init"
-	parsecmd "github.com/HarleyAppleChoi/junomum/cmd/parse"
+	initcmd "github.com/forbole/egldjuno/cmd/init"
+	parsecmd "github.com/forbole/egldjuno/cmd/parse"
 )
 
 // Config represents the general configuration for the commands

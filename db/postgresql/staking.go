@@ -5,7 +5,7 @@ import (
 
 	"github.com/lib/pq"
 
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/types"
 )
 
 // SaveStakeRequirements save the stake requirement from cadence call

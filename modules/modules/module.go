@@ -4,7 +4,7 @@ import (
 	"github.com/go-co-op/gocron"
 	"github.com/onflow/flow-go-sdk"
 
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/types"
 )
 
 // Module represents a generic module without any particular handling of data

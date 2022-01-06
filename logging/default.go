@@ -9,8 +9,8 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 
-	"github.com/HarleyAppleChoi/junomum/modules/modules"
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/modules/modules"
+	"github.com/forbole/egldjuno/types"
 )
 
 var (

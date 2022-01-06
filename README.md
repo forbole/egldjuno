@@ -1,16 +1,16 @@
 <div align="center">
-  <h1> junomum </h1>
+  <h1> egldjuno </h1>
 </div>
 
 ![banner](.docs/.img/logo.png)
 
 > This branch is intended to be used with Flow Go SDK.
 
-<!-- [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/HarleyAppleChoi/junomum/Tests)](https://github.com/HarleyAppleChoi/junomum/actions?query=workflow%3ATests)
-[![Go Report Card](https://goreportcard.com/badge/github.com/HarleyAppleChoi/junomum)](https://goreportcard.com/report/github.com/HarleyAppleChoi/junomum)
-[![Codecov](https://img.shields.io/codecov/c/github/HarleyAppleChoi/junomum)](https://codecov.io/gh/HarleyAppleChoi/junomum/branch/cosmos-v0.40.x) -->
+<!-- [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/forbole/egldjuno/Tests)](https://github.com/forbole/egldjuno/actions?query=workflow%3ATests)
+[![Go Report Card](https://goreportcard.com/badge/github.com/forbole/egldjuno)](https://goreportcard.com/report/github.com/forbole/egldjuno)
+[![Codecov](https://img.shields.io/codecov/c/github/forbole/egldjuno)](https://codecov.io/gh/forbole/egldjuno/branch/cosmos-v0.40.x) -->
 
-> junomum is a template for blockchain data aggregator and exporter that provides the ability for developers and clients to query for indexed chain data.
+> egldjuno is a template for blockchain data aggregator and exporter that provides the ability for developers and clients to query for indexed chain data.
 
 ## Table of Contents
   - [Background](#background)
@@ -20,7 +20,7 @@
   - [License](#license)
 
 ## Background
-This version of junomum is a fork of [FissionLabs's Juno](https://github.com/fissionlabsio/juno). 
+This version of egldjuno is a fork of [FissionLabs's Juno](https://github.com/fissionlabsio/juno). 
 
 The main reason behind the fork what to improve the original project by: 
 
@@ -32,7 +32,7 @@ We achieved the first objective by supporting both PostgreSQL and MongoDB. We al
 On the other hand, to achieve a highly modular code, we implemented extension points through the `worker.RegisterBlockHandler`, `worker.RegisterTxHandler` and `worker.RegisterMsgHandler` methods. You can use those to extend the default working of the code (which simply parses and saves the data on the database) with whatever operation you want.    
 
 ## Usage
-To know how to setup and run junomum, please refer to the [docs folder](.docs).
+To know how to setup and run egldjuno, please refer to the [docs folder](.docs).
 
 ## Testing
 If you want to test the code, you can do so by running

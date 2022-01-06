@@ -1,8 +1,8 @@
 package config
 
 import (
-	initcmd "github.com/HarleyAppleChoi/junomum/cmd/init"
-	juno "github.com/HarleyAppleChoi/junomum/types"
+	initcmd "github.com/forbole/egldjuno/cmd/init"
+	juno "github.com/forbole/egldjuno/types"
 	"github.com/spf13/cobra"
 )
 

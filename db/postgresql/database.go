@@ -3,12 +3,12 @@ package postgresql
 import (
 	"fmt"
 
-	juno "github.com/HarleyAppleChoi/junomum/types"
+	juno "github.com/forbole/egldjuno/types"
 
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/HarleyAppleChoi/junomum/db"
-	database "github.com/HarleyAppleChoi/junomum/db/db"
+	"github.com/forbole/egldjuno/db"
+	database "github.com/forbole/egldjuno/db/db"
 
 	"github.com/jmoiron/sqlx"
 )

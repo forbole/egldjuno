@@ -3,14 +3,14 @@ package registrar
 import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/HarleyAppleChoi/junomum/logging"
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/logging"
+	"github.com/forbole/egldjuno/types"
 
-	"github.com/HarleyAppleChoi/junomum/modules/messages"
-	"github.com/HarleyAppleChoi/junomum/modules/modules"
+	"github.com/forbole/egldjuno/modules/messages"
+	"github.com/forbole/egldjuno/modules/modules"
 
-	"github.com/HarleyAppleChoi/junomum/client"
-	"github.com/HarleyAppleChoi/junomum/db"
+	"github.com/forbole/egldjuno/client"
+	"github.com/forbole/egldjuno/db"
 )
 
 // Registrar represents a modules registrar. This allows to build a list of modules that can later be used by
@@ -35,7 +35,7 @@ func (*EmptyRegistrar) BuildModules(
 
 // ------------------------------------------------------------------------------------------------------------------
 
-// DefaultRegistrar represents a registrar that allows to handle the default junomum modules
+// DefaultRegistrar represents a registrar that allows to handle the default egldjuno modules
 type DefaultRegistrar struct {
 	parser messages.MessageAddressesParser
 }

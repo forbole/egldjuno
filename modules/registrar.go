@@ -1,19 +1,19 @@
 package modules
 
 import (
-	"github.com/HarleyAppleChoi/junomum/client"
-	"github.com/HarleyAppleChoi/junomum/db"
-	"github.com/HarleyAppleChoi/junomum/db/postgresql"
+	"github.com/forbole/egldjuno/client"
+	"github.com/forbole/egldjuno/db"
+	"github.com/forbole/egldjuno/db/postgresql"
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/HarleyAppleChoi/junomum/modules/messages"
-	"github.com/HarleyAppleChoi/junomum/modules/modules"
-	"github.com/HarleyAppleChoi/junomum/modules/registrar"
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/modules/messages"
+	"github.com/forbole/egldjuno/modules/modules"
+	"github.com/forbole/egldjuno/modules/registrar"
+	"github.com/forbole/egldjuno/types"
 
-	"github.com/HarleyAppleChoi/junomum/modules/auth"
-	"github.com/HarleyAppleChoi/junomum/modules/consensus"
-	"github.com/HarleyAppleChoi/junomum/modules/telemetry"
+	"github.com/forbole/egldjuno/modules/auth"
+	"github.com/forbole/egldjuno/modules/consensus"
+	"github.com/forbole/egldjuno/modules/telemetry"
 )
 
 var (

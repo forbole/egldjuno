@@ -2,13 +2,13 @@ package telemetry
 
 import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
-	"github.com/HarleyAppleChoi/junomum/modules/messages"
-	"github.com/HarleyAppleChoi/junomum/modules/modules"
+	"github.com/forbole/egldjuno/modules/messages"
+	"github.com/forbole/egldjuno/modules/modules"
 
-	"github.com/HarleyAppleChoi/junomum/client"
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/client"
+	"github.com/forbole/egldjuno/types"
 
-	db "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	db "github.com/forbole/egldjuno/db/postgresql"
 )
 
 const (

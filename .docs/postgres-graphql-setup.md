@@ -4,8 +4,8 @@ In order to properly setup this project to work with PostgreSQL and, at the same
 ## 1. Install PostgreSQL
 First of all, install PostgreSQL following the [official documentation](https://www.postgresql.org/download/).
 
-## 2. Create the junomum database 
-Once you have installed PostgreSQL, you will need to create the junomum database. To do so, follow the below steps. 
+## 2. Create the egldjuno database 
+Once you have installed PostgreSQL, you will need to create the egldjuno database. To do so, follow the below steps. 
 
 1. Log into PostgreSQL with root access.
    ```bash
@@ -22,14 +22,14 @@ Once you have installed PostgreSQL, you will need to create the junomum database
    \q
    ```
    
-4. Create the junomum database and set yor user to be the owner. 
+4. Create the egldjuno database and set yor user to be the owner. 
    ```bash
-   createdb junomum -O <your-username>
+   createdb egldjuno -O <your-username>
    ```
    
-5. Log into the junomum database. 
+5. Log into the egldjuno database. 
    ```bash
-   psql junomum
+   psql egldjuno
    ```
    
 6. Create all the required tables.  

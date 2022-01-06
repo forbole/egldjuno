@@ -3,11 +3,11 @@ package builder
 import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/types"
 
-	"github.com/HarleyAppleChoi/junomum/db"
+	"github.com/forbole/egldjuno/db"
 
-	database "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	database "github.com/forbole/egldjuno/db/postgresql"
 )
 
 // Builder represents a generic Builder implementation that build the proper database

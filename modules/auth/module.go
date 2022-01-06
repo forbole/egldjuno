@@ -2,12 +2,12 @@ package auth
 
 import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
-	"github.com/HarleyAppleChoi/junomum/modules/messages"
-	"github.com/HarleyAppleChoi/junomum/modules/modules"
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/modules/messages"
+	"github.com/forbole/egldjuno/modules/modules"
+	"github.com/forbole/egldjuno/types"
 
-	"github.com/HarleyAppleChoi/junomum/client"
-	db "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	"github.com/forbole/egldjuno/client"
+	db "github.com/forbole/egldjuno/db/postgresql"
 	"github.com/go-co-op/gocron"
 )
 

@@ -3,12 +3,12 @@ package worker
 import (
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
-	"github.com/HarleyAppleChoi/junomum/client"
-	"github.com/HarleyAppleChoi/junomum/db"
-	"github.com/HarleyAppleChoi/junomum/logging"
+	"github.com/forbole/egldjuno/client"
+	"github.com/forbole/egldjuno/db"
+	"github.com/forbole/egldjuno/logging"
 
-	"github.com/HarleyAppleChoi/junomum/modules/modules"
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/modules/modules"
+	"github.com/forbole/egldjuno/types"
 )
 
 type Config struct {

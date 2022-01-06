@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/types"
 
 	"github.com/rs/zerolog"
 	"github.com/spf13/cobra"
@@ -94,7 +94,7 @@ func InitCmd(cfg *Config) *cobra.Command {
 	// Set default flags
 	command.Flags().Bool(flagReplace, false, "replaces any existing configuration with a new one")
 
-	command.Flags().String(flagRPCClientName, "junomum", "Name of the subscriber to use when listening to events")
+	command.Flags().String(flagRPCClientName, "egldjuno", "Name of the subscriber to use when listening to events")
 	command.Flags().String(flagRPCAddress, "http://localhost:9000", "RPC address to use")
 	command.Flags().String(flagRPCContract, "Mainnet", "Apply Mainnet contract address into Candance query")
 

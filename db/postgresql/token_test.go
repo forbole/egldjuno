@@ -1,7 +1,7 @@
 package postgresql_test
 
 import (
-	dbtypes "github.com/HarleyAppleChoi/junomum/db/types"
+	dbtypes "github.com/forbole/egldjuno/db/types"
 )
 
 func (suite *DbTestSuite) TestSaveConsensus_SaveSupply() {

@@ -3,13 +3,13 @@ package utils
 import (
 	"fmt"
 
-	"github.com/HarleyAppleChoi/junomum/client"
-	"github.com/HarleyAppleChoi/junomum/types"
+	"github.com/forbole/egldjuno/client"
+	"github.com/forbole/egldjuno/types"
 	"github.com/onflow/flow-go-sdk"
 
 	"github.com/rs/zerolog/log"
 
-	db "github.com/HarleyAppleChoi/junomum/db/postgresql"
+	db "github.com/forbole/egldjuno/db/postgresql"
 )
 
 // GetAccounts returns the account data for the given addresses
