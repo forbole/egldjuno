@@ -1,25 +1,25 @@
 package client
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"strconv"
 	"time"
-	"bytes"
-
 
 	"github.com/rs/zerolog/log"
 
+	"net/http"
+
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 	"github.com/cosmos/cosmos-sdk/types/tx"
-	"net/http"
 	"github.com/forbole/egldjuno/types"
 
 	"google.golang.org/grpc"
 
-	"github.com/onflow/flow-go-sdk"
-	"github.com/onflow/flow-go-sdk/client"
+	elasticsearch "github.com/elastic/go-elasticsearch/v7"
 )
 
 // Proxy implements a wrapper around both a Tendermint RPC client and a
@@ -28,6 +28,7 @@ type Proxy struct {
 	ctx            context.Context
 	encodingConfig *params.EncodingConfig
 	apiClient *httpClient
+	elasticClient *elasticsearch.Client
 	grpConnection   *grpc.ClientConn
 	txServiceClient tx.ServiceClient
 	genesisHeight   uint64
@@ -48,10 +49,26 @@ func NewClientProxy(cfg types.Config, encodingConfig *params.EncodingConfig) (*P
 		ApiAdress:address,
 	}
 
+	elasticCfg := elasticsearch.Config{
+		Addresses: []string{
+		  "https://index.elrond.com/",
+		},
+		Transport: &http.Transport{
+		  MaxIdleConnsPerHost:   10,
+		  ResponseHeaderTimeout: time.Second,
+		  },
+		}
+	es,err:=elasticsearch.NewClient(elasticCfg)
+
+	if err != nil {
+		panic(err)
+	}
+
 	return &Proxy{
 		encodingConfig:  encodingConfig,
 		ctx:             context.Background(),
 		apiClient:       httpClient,
+		elasticClient: es,
 		grpConnection:   nil,
 		txServiceClient: nil,
 		genesisHeight:   cfg.GetCosmosConfig().GetGenesisHeight(),
@@ -98,10 +115,16 @@ func (cp *Proxy) GetGenesisHeight() uint64 {
 	return cp.genesisHeight
 }
 
+
+
+
+
+/* 
 // LatestHeight returns the latest block height on the active chain. An error
 // is returned if the query fails.
 func (cp *Proxy) LatestHeight() (int64, error) {
-	block, err := cp.flowClient.GetLatestBlock(cp.ctx, true)
+
+	block, err := cp.RestRequestGetDecoded()
 	if err != nil {
 		return -1, err
 	}
@@ -112,7 +135,11 @@ func (cp *Proxy) LatestHeight() (int64, error) {
 
 // Block queries for a block by height. An error is returned if the query fails.
 func (cp *Proxy) Block(height int64) (*flow.Block, error) {
-	block, err := cp.flowClient.GetBlockByHeight(cp.ctx, uint64(height))
+	params:=map[string]string{
+		"nonce": strconv.FormatInt(height,10),
+	}
+	block:=types.Block{}
+	err := cp.RestRequestGetDecoded("blocks",params,block)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +156,7 @@ func (cp *Proxy) GetTransaction(hash string) (*flow.Transaction, error) {
 
 	return transaction, nil
 }
-
+ */
 /*
 // NodeOperators returns all the known flow node operators for a given block
 // height. An error is returned if the query fails.
@@ -166,12 +193,12 @@ func (cp *Proxy) NodeOperators(height int64) (*types.NodeOperators, error) {
 	return &nodeOperators, nil
 } */
 
-
+/* 
 func (cp *Proxy) GetChainID() string {
 	// There is GetNetworkParameters rpc method that not implenment yet in flow-go-sdk.
 	return cp.contract.ChainID
-}
-
+} 
+ */
 /*
 // Genesis returns the genesis state
 func (cp *Proxy) Genesis() (*tmctypes.ResultGenesis, error) {
@@ -212,7 +239,7 @@ func (cp *Proxy) SubscribeNewBlocks(subscriber string) (<-chan tmctypes.ResultEv
 } */
 
 // Collections get all the collection from block
-func (cp *Proxy) Collections(block *flow.Block) []types.Collection {
+/* func (cp *Proxy) Collections(block *flow.Block) []types.Collection {
 	collectionsID := block.CollectionGuarantees
 	collections := make([]types.Collection, len(block.CollectionGuarantees))
 	for i, c := range collectionsID {
@@ -226,12 +253,12 @@ func (cp *Proxy) Collections(block *flow.Block) []types.Collection {
 		collections[i] = types.NewCollection(block.Height, collection.ID().String(), processed, collection.TransactionIDs)
 	}
 	return collections
-}
+} */
 
 // Txs queries for all the transactions in a block. Transactions are returned
 // in the TransactionResult format which internally contains an array of Transactions. An error is
 // returned if any query fails.
-func (cp *Proxy) Txs(block *flow.Block) (types.Txs, error) {
+/* func (cp *Proxy) Txs(block *flow.Block) (types.Txs, error) {
 
 	var transactionIDs []flow.Identifier
 	collections := cp.Collections(block)
@@ -339,3 +366,4 @@ func (cp *Proxy) Stop() {
 		log.Fatal().Str("module", "client proxy").Err(err).Msg("error while stopping proxy")
 	}
 }
+ */

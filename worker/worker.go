@@ -53,11 +53,17 @@ func (w Worker) Start() {
 	logging.WorkerCount.Inc()
 
 	for i := range w.queue {
+		/* 1. Get Epoch size 
+		   2. query the pages from botttom to the end
+		   3. if cannot query, check new epoch or wait for a new page
+		  */
+		
 		if err := w.process(i); err != nil {
 			// re-enqueue any failed job
 			// TODO: Implement exponential backoff or max retries for a block height.
 			go func() {
 				log.Error().Err(err).Int64("height", i).Msg("re-enqueueing failed block")
+				/* 		   3. if cannot query, check new epoch or wait for a new page */
 				w.queue <- i
 			}()
 		}
@@ -70,7 +76,7 @@ func (w Worker) Start() {
 // error if any export process fails.
 // To get all transaction and event from the block, follow the order so that wont double call:
 // block -> collection_grauntee -> transaction -> event
-func (w Worker) process(height int64) error {
+func (w Worker) process(height int64,shard int64) error {
 	exists, err := w.db.HasBlock(height)
 	if err != nil {
 		return err

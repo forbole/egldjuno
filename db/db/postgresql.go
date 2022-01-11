@@ -77,45 +77,28 @@ func (db *Database) HasBlock(height int64) (bool, error) {
 	return res, err
 }
 
-// SaveBlock implements db.Database
-func (db *Database) SaveBlock(block *flow.Block) error {
-	stmt := `INSERT INTO block (height,id,parent_id ,collection_guarantees,timestamp) VALUES ($1,$2,$3,$4,$5) ON CONFLICT DO NOTHING`
+    func (db *Database) SaveBlock(block []types.Block) error {
+    stmt:= `INSERT INTO block(hash,epoch,nonce,prev_hash,proposer,pub_key_bitmap,round,shard,size,size_txs,state_root_hash,time_stamp,tx_count,gas_consumed,gas_refunded,gas_penalized,max_gas_limit) VALUES `
 
-	grauntees := make([]string, len(block.CollectionGuarantees))
-	for i, collectionGuarantee := range block.CollectionGuarantees {
-		grauntees[i] = collectionGuarantee.CollectionID.String()
-	}
+    var params []interface{}
 
-	collectionGuarantees, err := json.Marshal(grauntees)
-	if err != nil {
-		return err
-	}
+	  for i, rows := range block{
+      ai := i * 17
+      stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1,ai+2,ai+3,ai+4,ai+5,ai+6,ai+7,ai+8,ai+9,ai+10,ai+11,ai+12,ai+13,ai+14,ai+15,ai+16,ai+17)
+      
+      params = append(params,rows.Hash,rows.Epoch,rows.Nonce,rows.PrevHash,rows.Proposer,rows.PubKeyBitmap,rows.Round,rows.Shard,rows.Size,rows.SizeTxs,rows.StateRootHash,rows.TimeStamp,rows.TxCount,rows.GasConsumed,rows.GasRefunded,rows.GasPenalized,rows.MaxGasLimit)
 
-	_, err = db.Sql.Exec(stmt,
-		block.Height, block.ID.String(), block.ParentID.String(), collectionGuarantees, block.Timestamp,
-	)
-	if err != nil {
-		return err
-	}
+    }
+	  stmt = stmt[:len(stmt)-1]
+    stmt += ` ON CONFLICT DO NOTHING` 
 
-	if len(block.Seals) == 0 {
-		return nil
-	}
+    _, err := db.Sqlx.Exec(stmt, params...)
+    if err != nil {
+      return err
+    }
 
-	var params []interface{}
-	stmt = `INSERT INTO block_seal (height,execution_receipt_id ,execution_receipt_signatures) VALUES `
-	for i, seal := range block.Seals {
-		vi := i * 3
-		stmt += fmt.Sprintf("($%d, $%d, $%d),", vi+1, vi+2, vi+3)
-		params = append(params, block.Height, seal.ExecutionReceiptID.String(), pq.ByteaArray(seal.ExecutionReceiptSignatures))
-	}
-
-	stmt = stmt[:len(stmt)-1] // Remove trailing ,
-	stmt += " ON CONFLICT DO NOTHING"
-	_, err = db.Sql.Exec(stmt, params...)
-
-	return err
-}
+    return nil 
+    }
 
 // SaveTx implements db.Database
 func (db *Database) SaveTxs(txs types.Txs) error {

@@ -49,6 +49,6 @@ func (m *Module) HandleTx(index int, tx *types.Tx) error {
 }
 
 // RegisterPeriodicOperations implements modules.Module
-func (m *Module) RegisterPeriodicOperations(scheduler *gocron.Scheduler) error {
-	return nil //RegisterPeriodicOps(scheduler, m.db, m.flowClient)
+func (m *Module) RunAdditionalOperations(scheduler *gocron.Scheduler) error {
+	return RunAdditionalOperations(scheduler, m.db, m.flowClient)
 }

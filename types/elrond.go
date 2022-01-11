@@ -45,39 +45,83 @@ func NewCommitSig(validatorAddress string, votingPower, proposerPriority, height
 // -------------------------------------------------------------------------------------------------------------------
 
 // Block contains the data of a single chain block
-type Block struct {
-	Height          int64
-	Hash            string
-	TxNum           int
-	TotalGas        uint64
-	ProposerAddress string
-	Timestamp       time.Time
-}
-
-// NewBlock allows to build a new Block instance
-func NewBlock(
-	height int64, hash string, txNum int, totalGas uint64, proposerAddress string, timestamp time.Time,
-) *Block {
-	return &Block{
-		Height:          height,
-		Hash:            hash,
-		TxNum:           txNum,
-		TotalGas:        totalGas,
-		ProposerAddress: proposerAddress,
-		Timestamp:       timestamp,
-	}
-}
-
-// NewBlockFromTmBlock builds a new Block instance from a given ResultBlock object
-func NewBlockFromTmBlock(blk *tmctypes.ResultBlock, totalGas uint64) *Block {
-	return NewBlock(
-		blk.Block.Height,
-		blk.Block.Hash().String(),
-		len(blk.Block.Txs),
-		totalGas,
-		ConvertValidatorAddressToBech32String(blk.Block.ProposerAddress),
-		blk.Block.Time,
-	)
+type Block struct { 
+	Hash string
+	Epoch int64
+	Nonce int64
+	PrevHash string
+	Proposer string
+	PubKeyBitmap string
+	Round int64
+	Shard int64
+	Size int64
+	SizeTxs int64
+	StateRootHash string
+	TimeStamp int64
+	TxCount int64
+	GasConsumed int64
+	GasRefunded int64
+	GasPenalized int64
+	MaxGasLimit int64
+  }
+// Equal tells whether v and w represent the same rows
+func (v Block) Equal(w Block)bool{
+	return v.Hash==w.Hash && 
+  v.Epoch==w.Epoch && 
+  v.Nonce==w.Nonce && 
+  v.PrevHash==w.PrevHash && 
+  v.Proposer==w.Proposer && 
+  v.PubKeyBitmap==w.PubKeyBitmap && 
+  v.Round==w.Round && 
+  v.Shard==w.Shard && 
+  v.Size==w.Size && 
+  v.SizeTxs==w.SizeTxs && 
+  v.StateRootHash==w.StateRootHash && 
+  v.TimeStamp==w.TimeStamp && 
+  v.TxCount==w.TxCount && 
+  v.GasConsumed==w.GasConsumed && 
+  v.GasRefunded==w.GasRefunded && 
+  v.GasPenalized==w.GasPenalized && 
+  v.MaxGasLimit==w.MaxGasLimit }
+  
+   // Block allows to build a new Block
+  func NewBlock( 
+	hash string,
+	epoch int64,
+	nonce int64,
+	prevHash string,
+	proposer string,
+	pubKeyBitmap string,
+	round int64,
+	shard int64,
+	size int64,
+	sizeTxs int64,
+	stateRootHash string,
+	timeStamp int64,
+	txCount int64,
+	gasConsumed int64,
+	gasRefunded int64,
+	gasPenalized int64,
+	maxGasLimit int64) Block{
+   return Block{
+   Hash:hash,
+   Epoch:epoch,
+   Nonce:nonce,
+   PrevHash:prevHash,
+   Proposer:proposer,
+   PubKeyBitmap:pubKeyBitmap,
+   Round:round,
+   Shard:shard,
+   Size:size,
+   SizeTxs:sizeTxs,
+   StateRootHash:stateRootHash,
+   TimeStamp:timeStamp,
+   TxCount:txCount,
+   GasConsumed:gasConsumed,
+   GasRefunded:gasRefunded,
+   GasPenalized:gasPenalized,
+   MaxGasLimit:maxGasLimit,
+  }
 }
 
 // Message represents the data of a single message
