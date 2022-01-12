@@ -2,12 +2,10 @@ package database
 
 import (
 	"database/sql"
-	"encoding/json"
 	"fmt"
 
 	"github.com/forbole/egldjuno/logging"
 
-	"github.com/onflow/flow-go-sdk"
 	"github.com/rs/zerolog/log"
 
 	"github.com/cosmos/cosmos-sdk/simapp/params"
@@ -92,7 +90,7 @@ func (db *Database) HasBlock(height int64) (bool, error) {
 	  stmt = stmt[:len(stmt)-1]
     stmt += ` ON CONFLICT DO NOTHING` 
 
-    _, err := db.Sqlx.Exec(stmt, params...)
+    _, err := db.Sql.Exec(stmt, params...)
     if err != nil {
       return err
     }

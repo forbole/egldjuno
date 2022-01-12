@@ -2,8 +2,6 @@ package types
 
 import (
 	"time"
-
-	tmctypes "github.com/tendermint/tendermint/rpc/core/types"
 )
 
 // Validator contains the data of a single validator
@@ -50,7 +48,7 @@ type Block struct {
 	Epoch int64
 	Nonce int64
 	PrevHash string
-	Proposer string
+	Proposer int64
 	PubKeyBitmap string
 	Round int64
 	Shard int64
@@ -63,6 +61,10 @@ type Block struct {
 	GasRefunded int64
 	GasPenalized int64
 	MaxGasLimit int64
+	
+	MiniBlocksHashes []string
+	Validators []int64
+	NotarizedBlocksHashes []string
   }
 // Equal tells whether v and w represent the same rows
 func (v Block) Equal(w Block)bool{
@@ -90,7 +92,7 @@ func (v Block) Equal(w Block)bool{
 	epoch int64,
 	nonce int64,
 	prevHash string,
-	proposer string,
+	proposer int64,
 	pubKeyBitmap string,
 	round int64,
 	shard int64,

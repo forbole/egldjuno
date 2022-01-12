@@ -4,17 +4,12 @@ import (
 	"fmt"
 
 	"github.com/forbole/egldjuno/logging"
-	"github.com/onflow/flow-go-sdk"
-
-	tmjson "github.com/tendermint/tendermint/libs/json"
 
 	"github.com/cosmos/cosmos-sdk/simapp/params"
 
 	"github.com/forbole/egldjuno/modules/modules"
 
 	"github.com/rs/zerolog/log"
-	tmos "github.com/tendermint/tendermint/libs/os"
-	tmtypes "github.com/tendermint/tendermint/types"
 
 	"github.com/forbole/egldjuno/client"
 	"github.com/forbole/egldjuno/db"
@@ -76,8 +71,8 @@ func (w Worker) Start() {
 // error if any export process fails.
 // To get all transaction and event from the block, follow the order so that wont double call:
 // block -> collection_grauntee -> transaction -> event
-func (w Worker) process(height int64,shard int64) error {
-	exists, err := w.db.HasBlock(height)
+func (w Worker) process(height int64) error {
+	/* exists, err := w.db.HasBlock(height)
 	if err != nil {
 		return err
 	}
@@ -85,12 +80,14 @@ func (w Worker) process(height int64,shard int64) error {
 	if exists {
 		log.Debug().Int64("height", height).Msg("skipping already exported block")
 		return nil
-	}
+	} */
+
+	return nil
 
 	// To get all transaction and event from the block, follow the order so that wont double call:
 	// block -> collection_grauntee -> transaction -> event
 
-	block, err := w.cp.Block(height)
+	/* block, err := w.cp.Block(height)
 	if err != nil {
 		log.Error().Err(err).Int64("height", height).Msg("failed to get block")
 		return err
@@ -146,9 +143,9 @@ func (w Worker) process(height int64,shard int64) error {
 		return err
 	}
 
-	return nil
+	return nil */
 }
-
+/* 
 func (w Worker) ExportTransactionResult(txids []flow.Identifier, height int64) error {
 	txResults, err := w.cp.TransactionResult(txids)
 	if len(txResults) == 0 {
@@ -182,9 +179,11 @@ func (w Worker) getGenesisFromRPC() (*tmtypes.GenesisDoc, error) {
 		return nil, err
 	}
 	return response.Genesis, nil */
-}
+//}
 
 // getGenesisFromFilePath tries reading the genesis doc from the given path
+
+/*
 func (w Worker) getGenesisFromFilePath(path string) (*tmtypes.GenesisDoc, error) {
 	log.Debug().Str("path", path).Msg("reading genesis from file")
 
@@ -215,6 +214,7 @@ func (w Worker) ExportBlock(b *flow.Block) error {
 	} */
 
 	// Save the block
+	/*
 	err := w.db.SaveBlock(b)
 	if err != nil {
 		log.Error().Err(err).Int64("height", int64(b.BlockHeader.Height)).Msg("failed to persist block")
@@ -291,3 +291,4 @@ func (w Worker) HandleGenesis(block *flow.Block) error {
 	}
 	return nil
 }
+ */

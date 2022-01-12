@@ -47,39 +47,3 @@ func (r AverageTimeRow) Equal(s AverageTimeRow) bool {
 	return r.AverageTime == s.AverageTime &&
 		r.Height == s.Height
 }
-
-// -------------------------------------------------------------------------------------------------------------------
-
-// BlockRow represents a single block row stored inside the database
-type BlockRow struct {
-	Height               int64     `db:"height"`
-	Id                   string    `db:"id"`
-	ParentId             string    `db:"parent_id"`
-	CollectionGuarantees string    `db:"collection_guarantees"`
-	Timestamp            time.Time `db:"timestamp"`
-}
-
-// Equal tells whether v and w represent the same rows
-func (v BlockRow) Equal(w BlockRow) bool {
-	return v.Height == w.Height &&
-		v.Id == w.Id &&
-		v.ParentId == w.ParentId &&
-		v.CollectionGuarantees == w.CollectionGuarantees &&
-		v.Timestamp.Equal(w.Timestamp)
-}
-
-// BlockRow allows to build a new BlockRow
-func NewBlockRow(
-	height int64,
-	id string,
-	parentId string,
-	collectionGuarantees string,
-	timestamp time.Time) BlockRow {
-	return BlockRow{
-		Height:               height,
-		Id:                   id,
-		ParentId:             parentId,
-		CollectionGuarantees: collectionGuarantees,
-		Timestamp:            timestamp,
-	}
-}

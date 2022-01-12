@@ -7,10 +7,8 @@ import (
 	"regexp"
 	"strings"
 	"testing"
-	"time"
 
 	"github.com/forbole/egldjuno/types/config"
-	"github.com/onflow/flow-go-sdk"
 
 	database "github.com/forbole/egldjuno/db/postgresql"
 	"github.com/forbole/egldjuno/types"
@@ -89,68 +87,3 @@ func (suite *DbTestSuite) SetupTest() {
 
 	suite.database = bigDipperDb
 }
-
-// getBlock builds, stores and returns a block for the provided height
-func (suite *DbTestSuite) getBlock(height int64) *flow.Block {
-	block := flow.Block{
-		flow.BlockHeader{
-			ID:        flow.HexToID("0x1"),
-			ParentID:  flow.HexToID("0x2"),
-			Height:    10,
-			Timestamp: time.Date(2021, 1, 1, 0, 0, 0, 0, time.Now().UTC().Location()),
-		},
-		flow.BlockPayload{
-			[]*flow.CollectionGuarantee{
-				&flow.CollectionGuarantee{
-					flow.HexToID("0x3"),
-				},
-			},
-			[]*flow.BlockSeal{
-				&flow.BlockSeal{
-					BlockID:                    flow.HexToID("0x4"),
-					ExecutionReceiptID:         flow.HexToID("0x5"),
-					ExecutionReceiptSignatures: nil,
-				},
-			},
-		},
-	}
-	err := suite.database.SaveBlock(&block)
-	suite.Require().NoError(err)
-	return &block
-}
-
-/*
-// getValidator stores inside the database a validator having the given
-// consensus address, validator address and validator public key
-func (suite *DbTestSuite) getValidator(consAddr, valAddr, pubkey string) types.Validator {
-	selfDelegation := suite.getAccount("cosmos1z4hfrxvlgl4s8u4n5ngjcw8kdqrcv43599amxs")
-
-	maxRate := sdk.NewDec(10)
-	maxChangeRate := sdk.NewDec(20)
-
-	validator := types.NewValidator(
-		consAddr,
-		valAddr,
-		pubkey,
-		selfDelegation.String(),
-		&maxChangeRate,
-		&maxRate,
-		1,
-	)
-	err := suite.database.SaveValidatorData(validator)
-	suite.Require().NoError(err)
-
-	return validator
-}
-
-// getAccount saves inside the database an account having the given address
-func (suite *DbTestSuite) getAccount(addr string) sdk.AccAddress {
-	delegator, err := sdk.AccAddressFromBech32(addr)
-	suite.Require().NoError(err)
-
-	_, err = suite.database.Sql.Exec(`INSERT INTO account (address) VALUES ($1) ON CONFLICT DO NOTHING`, delegator.String())
-	suite.Require().NoError(err)
-
-	return delegator
-}
-*/

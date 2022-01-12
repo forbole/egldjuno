@@ -33,7 +33,7 @@ func (db *Db) GetLastBlockHeight() (int64, error) {
 	if err != nil {
 		return 0, err
 	}
-	return block.Height, nil
+	return block.Round, nil
 }
 
 // -------------------------------------------------------------------------------------------------------------------

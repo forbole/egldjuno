@@ -205,3 +205,4 @@ func (db *Db) SaveStakerNodeId(stakerNodeId []types.StakerNodeId) error {
 
 	return nil
 }
+

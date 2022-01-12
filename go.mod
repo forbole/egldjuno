@@ -20,6 +20,7 @@ require (
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.7.0
 	github.com/tendermint/tendermint v0.34.11
+	github.com/tidwall/gjson v1.12.1
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	google.golang.org/grpc v1.37.0
 	gopkg.in/yaml.v2 v2.4.0

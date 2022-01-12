@@ -7,6 +7,7 @@ import (
 	authutils "github.com/forbole/egldjuno/modules/auth/utils"
 )
 
-func RunAdditionalOperations( db *db.Db, client client.Proxy){
+func RunAdditionalOperations( db *db.Db, client client.Proxy)error{
 	utils.WatchMethod(func() error { return authutils.GetHistoricBlocks(db,client) })
+	return nil
 }

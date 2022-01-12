@@ -210,3 +210,84 @@ func NewStakerNodeIdRow(
 		NodeId:  nodeId,
 	}
 }
+
+// BlockRow represents a single row of the block table
+type BlockRow struct { 
+	Hash string `db:"hash"`
+	Epoch int64 `db:"epoch"`
+	Nonce int64 `db:"nonce"`
+	PrevHash string `db:"prev_hash"`
+	Proposer string `db:"proposer"`
+	PubKeyBitmap string `db:"pub_key_bitmap"`
+	Round int64 `db:"round"`
+	Shard int64 `db:"shard"`
+	Size int64 `db:"size"`
+	SizeTxs int64 `db:"size_txs"`
+	StateRootHash string `db:"state_root_hash"`
+	TimeStamp int64 `db:"time_stamp"`
+	TxCount int64 `db:"tx_count"`
+	GasConsumed int64 `db:"gas_consumed"`
+	GasRefunded int64 `db:"gas_refunded"`
+	GasPenalized int64 `db:"gas_penalized"`
+	MaxGasLimit int64 `db:"max_gas_limit"`
+  }
+  
+	 // Equal tells whether v and w represent the same rows
+  func (v BlockRow) Equal(w BlockRow)bool{
+	return v.Hash==w.Hash && 
+  v.Epoch==w.Epoch && 
+  v.Nonce==w.Nonce && 
+  v.PrevHash==w.PrevHash && 
+  v.Proposer==w.Proposer && 
+  v.PubKeyBitmap==w.PubKeyBitmap && 
+  v.Round==w.Round && 
+  v.Shard==w.Shard && 
+  v.Size==w.Size && 
+  v.SizeTxs==w.SizeTxs && 
+  v.StateRootHash==w.StateRootHash && 
+  v.TimeStamp==w.TimeStamp && 
+  v.TxCount==w.TxCount && 
+  v.GasConsumed==w.GasConsumed && 
+  v.GasRefunded==w.GasRefunded && 
+  v.GasPenalized==w.GasPenalized && 
+  v.MaxGasLimit==w.MaxGasLimit }
+  
+	  // BlockRow allows to build a new BlockRow
+  func NewBlockRow( 
+	hash string,
+	epoch int64,
+	nonce int64,
+	prevHash string,
+	proposer string,
+	pubKeyBitmap string,
+	round int64,
+	shard int64,
+	size int64,
+	sizeTxs int64,
+	stateRootHash string,
+	timeStamp int64,
+	txCount int64,
+	gasConsumed int64,
+	gasRefunded int64,
+	gasPenalized int64,
+	maxGasLimit int64) BlockRow{
+   return BlockRow{
+   Hash:hash,
+   Epoch:epoch,
+   Nonce:nonce,
+   PrevHash:prevHash,
+   Proposer:proposer,
+   PubKeyBitmap:pubKeyBitmap,
+   Round:round,
+   Shard:shard,
+   Size:size,
+   SizeTxs:sizeTxs,
+   StateRootHash:stateRootHash,
+   TimeStamp:timeStamp,
+   TxCount:txCount,
+   GasConsumed:gasConsumed,
+   GasRefunded:gasRefunded,
+   GasPenalized:gasPenalized,
+   MaxGasLimit:maxGasLimit,
+  }
+  }

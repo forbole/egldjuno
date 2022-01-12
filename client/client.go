@@ -6,10 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"strconv"
 	"time"
-
-	"github.com/rs/zerolog/log"
 
 	"net/http"
 
@@ -55,7 +52,7 @@ func NewClientProxy(cfg types.Config, encodingConfig *params.EncodingConfig) (*P
 		},
 		Transport: &http.Transport{
 		  MaxIdleConnsPerHost:   10,
-		  ResponseHeaderTimeout: time.Second,
+		  ResponseHeaderTimeout: time.Hour,
 		  },
 		}
 	es,err:=elasticsearch.NewClient(elasticCfg)
@@ -116,23 +113,26 @@ func (cp *Proxy) GetGenesisHeight() uint64 {
 }
 
 
+func (cp *Proxy) ElasticClient()*elasticsearch.Client{
+	return cp.elasticClient
+}
 
 
 
-/* 
 // LatestHeight returns the latest block height on the active chain. An error
 // is returned if the query fails.
 func (cp *Proxy) LatestHeight() (int64, error) {
 
-	block, err := cp.RestRequestGetDecoded()
+	var blocks []types.Block
+	err := cp.RestRequestGetDecoded("blocks",nil,&blocks)
 	if err != nil {
 		return -1, err
 	}
 
-	height := int64(block.Height)
+	height := int64(blocks[0].Round)
 	return height, nil
 }
-
+/*
 // Block queries for a block by height. An error is returned if the query fails.
 func (cp *Proxy) Block(height int64) (*flow.Block, error) {
 	params:=map[string]string{
@@ -358,12 +358,10 @@ func (cp *Proxy) Events(transactionID string, height int) ([]types.Event, error)
 	}
 	return ev, nil
 }
-
+*/
 // Stop defers the node stop execution to the RPC client.
 func (cp *Proxy) Stop() {
-	err := cp.flowClient.Close()
-	if err != nil {
-		log.Fatal().Str("module", "client proxy").Err(err).Msg("error while stopping proxy")
-	}
+	
+
 }
- */
+ 
