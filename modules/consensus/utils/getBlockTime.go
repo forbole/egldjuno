@@ -8,16 +8,16 @@ import (
 
 // GetBlockTimeInMinute get last block in db and get the block time in minute
 func GetBlockTimeInMinute(db *database.Db) (*types.BlockTime, error) {
-/* 
-	block, err := db.GetLastBlock()
-	if err != nil {
-		return nil, err
-	}
+	/*
+		block, err := db.GetLastBlock()
+		if err != nil {
+			return nil, err
+		}
 
-	genesis, err := db.GetGenesis()
-	if err != nil {
-		return nil, err
-	} */
+		genesis, err := db.GetGenesis()
+		if err != nil {
+			return nil, err
+		} */
 
 	/* // Check if the chain has been created at least a minute ago
 	if block.TimeStamp.Sub(genesis.Time).Minutes() < 0 {
@@ -33,7 +33,7 @@ func GetBlockTimeInMinute(db *database.Db) (*types.BlockTime, error) {
 	blocktime := types.NewBlockTime(block.Height, newBlockTime)
 	return &blocktime, nil */
 
-	return nil,nil
+	return nil, nil
 }
 
 // GetBlockTimeInHour get last block in db and get the block time in hour
@@ -64,7 +64,7 @@ func GetBlockTimeInHour(db *database.Db) (*types.BlockTime, error) {
 	blocktime := types.NewBlockTime(block.Height, newBlockTime)
 
 	return &blocktime, nil */
-	return nil,nil
+	return nil, nil
 
 }
 
@@ -95,7 +95,7 @@ func GetBlockTimeInDay(db *database.Db) (*types.BlockTime, error) {
 	blocktime := types.NewBlockTime(block.Height, newBlockTime)
 
 	return &blocktime, nil */
-return nil,nil
+	return nil, nil
 }
 
 // GetGenesisBlockTime get the genesis block from db and calculate block time using latest block

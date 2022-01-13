@@ -21,7 +21,6 @@ func (suite *DbTestSuite) TestSaveConsensus_GetBlockHeightTimeMinuteAgo() {
 	_, err = suite.database.GetBlockHeightTimeMinuteAgo(timeNow)
 	suite.Require().NoError(err)
 
-	
 }
 
 func (suite *DbTestSuite) TestSaveConsensus_GetBlockHeightTimeHourAgo() {

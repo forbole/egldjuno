@@ -19,7 +19,7 @@ import (
 
 // MessageNotSupported returns an error telling that the given message is not supported
 func MessageNotSupported(tx types.Tx) error {
-	return fmt.Errorf("message type not supported: %s", tx.Script)
+	return fmt.Errorf("message type not supported: %s", tx.Data)
 }
 
 // MessageAddressesParser represents a function that extracts all the
@@ -59,11 +59,7 @@ var CosmosMessageAddressesParser = JoinMessageParsers(
 // DefaultMessagesParser represents the default messages parser that simply returns all account that
 // mutate the state by the transaction
 func DefaultMessagesParser(_ codec.Marshaler, tx types.Tx) ([]string, error) {
-	var signers []string
-	for _, authorizers := range tx.Authorizers {
-		signers = append(signers, authorizers)
-	}
-	return signers, nil
+	return []string{tx.Sender,tx.Receiver}, nil
 }
 
 /*

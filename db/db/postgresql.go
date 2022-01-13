@@ -9,7 +9,6 @@ import (
 	"github.com/rs/zerolog/log"
 
 	"github.com/cosmos/cosmos-sdk/simapp/params"
-	"github.com/lib/pq"
 
 	"github.com/forbole/egldjuno/db"
 	"github.com/forbole/egldjuno/types"
@@ -75,54 +74,29 @@ func (db *Database) HasBlock(height int64) (bool, error) {
 	return res, err
 }
 
-    func (db *Database) SaveBlock(block []types.Block) error {
-    stmt:= `INSERT INTO block(hash,epoch,nonce,prev_hash,proposer,pub_key_bitmap,round,shard,size,size_txs,state_root_hash,time_stamp,tx_count,gas_consumed,gas_refunded,gas_penalized,max_gas_limit) VALUES `
+func (db *Database) SaveBlock(block []types.Block) error {
+	stmt := `INSERT INTO block(hash,epoch,nonce,prev_hash,proposer,pub_key_bitmap,round,shard,size,size_txs,state_root_hash,time_stamp,tx_count,gas_consumed,gas_refunded,gas_penalized,max_gas_limit) VALUES `
 
-    var params []interface{}
+	var params []interface{}
 
-	  for i, rows := range block{
-      ai := i * 17
-      stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1,ai+2,ai+3,ai+4,ai+5,ai+6,ai+7,ai+8,ai+9,ai+10,ai+11,ai+12,ai+13,ai+14,ai+15,ai+16,ai+17)
-      
-      params = append(params,rows.Hash,rows.Epoch,rows.Nonce,rows.PrevHash,rows.Proposer,rows.PubKeyBitmap,rows.Round,rows.Shard,rows.Size,rows.SizeTxs,rows.StateRootHash,rows.TimeStamp,rows.TxCount,rows.GasConsumed,rows.GasRefunded,rows.GasPenalized,rows.MaxGasLimit)
+	for i, rows := range block {
+		ai := i * 17
+		stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1, ai+2, ai+3, ai+4, ai+5, ai+6, ai+7, ai+8, ai+9, ai+10, ai+11, ai+12, ai+13, ai+14, ai+15, ai+16, ai+17)
 
-    }
-	  stmt = stmt[:len(stmt)-1]
-    stmt += ` ON CONFLICT DO NOTHING` 
-
-    _, err := db.Sql.Exec(stmt, params...)
-    if err != nil {
-      return err
-    }
-
-    return nil 
-    }
-
-// SaveTx implements db.Database
-func (db *Database) SaveTxs(txs types.Txs) error {
-	if len(txs) == 0 {
-		return nil
-	}
-	sqlStatement := `
-INSERT INTO transaction 
-    (height,transaction_id,script,arguments,reference_block_id,gas_limit,proposal_key ,payer,authorizers,payload_signature,envelope_signatures ) 
-VALUES `
-
-	var vparams []interface{}
-	for i, tx := range txs {
-		vi := i * 11
-		sqlStatement += fmt.Sprintf(`($%d, $%d, $%d, $%d, $%d, $%d, $%d, $%d, $%d, $%d, $%d),`,
-			vi+1, vi+2, vi+3, vi+4, vi+5, vi+6, vi+7, vi+8, vi+9, vi+10, vi+11)
-		vparams = append(vparams, tx.Height, tx.TransactionID, tx.Script, pq.ByteaArray(tx.Arguments), tx.ReferenceBlockID, tx.GasLimit, tx.ProposalKey, tx.Payer, pq.StringArray(tx.Authorizers),
-			tx.PayloadSignatures, tx.EnvelopeSignatures)
+		params = append(params, rows.Hash, rows.Epoch, rows.Nonce, rows.PrevHash, rows.Proposer, rows.PubKeyBitmap, rows.Round, rows.Shard, rows.Size, rows.SizeTxs, rows.StateRootHash, rows.TimeStamp, rows.TxCount, rows.GasConsumed, rows.GasRefunded, rows.GasPenalized, rows.MaxGasLimit)
 
 	}
-	sqlStatement = sqlStatement[:len(sqlStatement)-1] // Remove trailing ,
+	stmt = stmt[:len(stmt)-1]
+	stmt += ` ON CONFLICT DO NOTHING`
 
-	sqlStatement += `ON CONFLICT DO NOTHING`
-	_, err := db.Sql.Exec(sqlStatement, vparams...)
-	return err
+	_, err := db.Sql.Exec(stmt, params...)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
+
 
 // HasValidator implements db.Database
 func (db *Database) HasValidator(addr string) (bool, error) {
@@ -206,15 +180,6 @@ func (db *Database) SaveCommitSignatures(signatures []*types.CommitSig) error {
 	return err
 }
 
-// SaveMessage implements db.Database
-func (db *Database) SaveMessage(msg *types.Message) error {
-	stmt := `
-INSERT INTO message(transaction_hash, index, type, value, involved_accounts_addresses) 
-VALUES ($1, $2, $3, $4, $5)`
-
-	_, err := db.Sql.Exec(stmt, msg.TxHash, msg.Index, msg.Type, msg.Value, pq.Array(msg.Addresses))
-	return err
-}
 
 // Close implements db.Database
 func (db *Database) Close() {
@@ -329,3 +294,27 @@ func (db *Database) SaveTransactionResult(transactionResult []types.TransactionR
 
 	return nil
 }
+
+func (db *Database) SaveTxs(transaction types.Txs) error {
+    stmt:= `INSERT INTO tx(tx_hash,gas_limit,gas_price,gas_used,mini_block_hash,nonce,receiver,receiver_shard,round,sender,sender_shard,signature,status,value,fee,timestamp,data,token_identifier,action,scam_info) VALUES `
+
+    var params []interface{}
+
+	  for i, rows := range transaction{
+      ai := i * 20
+      stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1,ai+2,ai+3,ai+4,ai+5,ai+6,ai+7,ai+8,ai+9,ai+10,ai+11,ai+12,ai+13,ai+14,ai+15,ai+16,ai+17,ai+18,ai+19,ai+20)
+      
+      params = append(params,rows.TxHash,rows.GasLimit,rows.GasPrice,rows.GasUsed,rows.MiniBlockHash,rows.Nonce,rows.Receiver,rows.ReceiverShard,rows.Round,rows.Sender,rows.SenderShard,rows.Signature,rows.Status,rows.Value,rows.Fee,rows.Timestamp,rows.Data,rows.TokenIdentifier,rows.Action,rows.ScamInfo)
+
+    }
+	  stmt = stmt[:len(stmt)-1]
+    stmt += ` ON CONFLICT DO NOTHING` 
+
+    _, err := db.Sql.Exec(stmt, params...)
+    if err != nil {
+      return err
+    }
+
+    return nil 
+    }
+     

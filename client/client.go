@@ -22,40 +22,40 @@ import (
 // Proxy implements a wrapper around both a Tendermint RPC client and a
 // Cosmos Sdk REST client that allows for essential data queries.
 type Proxy struct {
-	ctx            context.Context
-	encodingConfig *params.EncodingConfig
-	apiClient *httpClient
-	elasticClient *elasticsearch.Client
+	ctx             context.Context
+	encodingConfig  *params.EncodingConfig
+	apiClient       *httpClient
+	elasticClient   *elasticsearch.Client
 	grpConnection   *grpc.ClientConn
 	txServiceClient tx.ServiceClient
 	genesisHeight   uint64
 }
 
-type httpClient struct{
-	Client *http.Client
+type httpClient struct {
+	Client    *http.Client
 	ApiAdress string
 }
 
 // NewClientProxy allows to build a new Proxy instance
 func NewClientProxy(cfg types.Config, encodingConfig *params.EncodingConfig) (*Proxy, error) {
-	address:=cfg.GetRPCConfig().GetAddress()
+	address := cfg.GetRPCConfig().GetAddress()
 	client := &http.Client{Timeout: 10 * time.Second}
-	
-	httpClient  := &httpClient{
-		Client:client,
-		ApiAdress:address,
+
+	httpClient := &httpClient{
+		Client:    client,
+		ApiAdress: address,
 	}
 
 	elasticCfg := elasticsearch.Config{
 		Addresses: []string{
-		  "https://index.elrond.com/",
+			"https://index.elrond.com/",
 		},
 		Transport: &http.Transport{
-		  MaxIdleConnsPerHost:   10,
-		  ResponseHeaderTimeout: time.Hour,
-		  },
-		}
-	es,err:=elasticsearch.NewClient(elasticCfg)
+			MaxIdleConnsPerHost:   10,
+			ResponseHeaderTimeout: time.Hour,
+		},
+	}
+	es, err := elasticsearch.NewClient(elasticCfg)
 
 	if err != nil {
 		panic(err)
@@ -65,7 +65,7 @@ func NewClientProxy(cfg types.Config, encodingConfig *params.EncodingConfig) (*P
 		encodingConfig:  encodingConfig,
 		ctx:             context.Background(),
 		apiClient:       httpClient,
-		elasticClient: es,
+		elasticClient:   es,
 		grpConnection:   nil,
 		txServiceClient: nil,
 		genesisHeight:   cfg.GetCosmosConfig().GetGenesisHeight(),
@@ -74,17 +74,17 @@ func NewClientProxy(cfg types.Config, encodingConfig *params.EncodingConfig) (*P
 
 // QueryLCD queries the LCD at the given endpoint, and deserializes the result into the given pointer.
 // If an error is raised, returns the error.
-func (cp Proxy) restRequestGet(endpoint string,values map[string]string)([]byte,error) {
+func (cp Proxy) RestRequestGet(endpoint string, values map[string]string) ([]byte, error) {
 	jsonData, err := json.Marshal(values)
 
-	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/%s",cp.apiClient.ApiAdress,endpoint), bytes.NewBuffer(jsonData))
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/%s", cp.apiClient.ApiAdress, endpoint), bytes.NewBuffer(jsonData))
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
 	response, err := cp.apiClient.Client.Do(req)
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
 	// Close the connection to reuse it
@@ -92,18 +92,18 @@ func (cp Proxy) restRequestGet(endpoint string,values map[string]string)([]byte,
 
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
-		return nil,err
+		return nil, err
 	}
 
-	return body,nil
+	return body, nil
 }
 
-func (cp Proxy) RestRequestGetDecoded(endpoint string,values map[string]string,ptr interface{})error{
-	bz,err:= cp.restRequestGet(endpoint,values)
-	if err!=nil{
+func (cp Proxy) RestRequestGetDecoded(endpoint string, values map[string]string, ptr interface{}) error {
+	bz, err := cp.restRequestGet(endpoint, values)
+	if err != nil {
 		return err
 	}
-	
+
 	return json.Unmarshal(bz, &ptr)
 }
 
@@ -112,19 +112,16 @@ func (cp *Proxy) GetGenesisHeight() uint64 {
 	return cp.genesisHeight
 }
 
-
-func (cp *Proxy) ElasticClient()*elasticsearch.Client{
+func (cp *Proxy) ElasticClient() *elasticsearch.Client {
 	return cp.elasticClient
 }
-
-
 
 // LatestHeight returns the latest block height on the active chain. An error
 // is returned if the query fails.
 func (cp *Proxy) LatestHeight() (int64, error) {
 
 	var blocks []types.Block
-	err := cp.RestRequestGetDecoded("blocks",nil,&blocks)
+	err := cp.RestRequestGetDecoded("blocks", nil, &blocks)
 	if err != nil {
 		return -1, err
 	}
@@ -132,6 +129,7 @@ func (cp *Proxy) LatestHeight() (int64, error) {
 	height := int64(blocks[0].Round)
 	return height, nil
 }
+
 /*
 // Block queries for a block by height. An error is returned if the query fails.
 func (cp *Proxy) Block(height int64) (*flow.Block, error) {
@@ -156,7 +154,7 @@ func (cp *Proxy) GetTransaction(hash string) (*flow.Transaction, error) {
 
 	return transaction, nil
 }
- */
+*/
 /*
 // NodeOperators returns all the known flow node operators for a given block
 // height. An error is returned if the query fails.
@@ -193,12 +191,12 @@ func (cp *Proxy) NodeOperators(height int64) (*types.NodeOperators, error) {
 	return &nodeOperators, nil
 } */
 
-/* 
+/*
 func (cp *Proxy) GetChainID() string {
 	// There is GetNetworkParameters rpc method that not implenment yet in flow-go-sdk.
 	return cp.contract.ChainID
-} 
- */
+}
+*/
 /*
 // Genesis returns the genesis state
 func (cp *Proxy) Genesis() (*tmctypes.ResultGenesis, error) {
@@ -361,7 +359,5 @@ func (cp *Proxy) Events(transactionID string, height int) ([]types.Event, error)
 */
 // Stop defers the node stop execution to the RPC client.
 func (cp *Proxy) Stop() {
-	
 
 }
- 

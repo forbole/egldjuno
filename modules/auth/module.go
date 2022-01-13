@@ -8,21 +8,18 @@ import (
 	"github.com/forbole/egldjuno/client"
 	db "github.com/forbole/egldjuno/db/postgresql"
 	"github.com/go-co-op/gocron"
-
 )
 
 var (
-	_ modules.Module            = &Module{}
+	_ modules.Module                     = &Module{}
 	_ modules.AdditionalOperationsModule = &Module{}
-
-
 )
 
 // Module represents the x/auth module
 type Module struct {
 	messagesParser messages.MessageAddressesParser
 	encodingConfig *params.EncodingConfig
-	clients     client.Proxy
+	clients        client.Proxy
 	db             *db.Db
 }
 
@@ -35,7 +32,7 @@ func NewModule(
 	return &Module{
 		messagesParser: messagesParser,
 		encodingConfig: encodingConfig,
-		clients:     clients,
+		clients:        clients,
 		db:             db,
 	}
 }
@@ -47,10 +44,10 @@ func (m *Module) Name() string {
 
 // RegisterPeriodicOperations implements modules.Module
 func (m *Module) RunAdditionalOperations() error {
-	return RunAdditionalOperations( m.db, m.clients)
+	return RunAdditionalOperations(m.db, m.clients)
 }
 
 // RegisterPeriodicOperations implements modules.Module
 func (m *Module) RegisterPeriodicOperations(scheduler *gocron.Scheduler) error {
-	return RegisterPeriodicOperations(scheduler, m.db,m.clients)
+	return RegisterPeriodicOperations(scheduler, m.db, m.clients)
 }

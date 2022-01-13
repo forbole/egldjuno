@@ -38,10 +38,6 @@ type Database interface {
 	// An error is returned if the operation fails.
 	SaveCommitSignatures(signatures []*types.CommitSig) error
 
-	// SaveMessage stores a single message.
-	// An error is returned if the operation fails.
-	SaveMessage(msg *types.Message) error
-
 	// SaveEvent store an array of event emitted in a block.
 	// An error is returned if the operation fails.
 	SaveEvents(events []types.Event) error

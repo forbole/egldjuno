@@ -48,11 +48,11 @@ func (w Worker) Start() {
 	logging.WorkerCount.Inc()
 
 	for i := range w.queue {
-		/* 1. Get Epoch size 
+		/* 1. Get Epoch size
 		   2. query the pages from botttom to the end
 		   3. if cannot query, check new epoch or wait for a new page
-		  */
-		
+		*/
+
 		if err := w.process(i); err != nil {
 			// re-enqueue any failed job
 			// TODO: Implement exponential backoff or max retries for a block height.
@@ -145,7 +145,8 @@ func (w Worker) process(height int64) error {
 
 	return nil */
 }
-/* 
+
+/*
 func (w Worker) ExportTransactionResult(txids []flow.Identifier, height int64) error {
 	txResults, err := w.cp.TransactionResult(txids)
 	if len(txResults) == 0 {
@@ -213,8 +214,8 @@ func (w Worker) ExportBlock(b *flow.Block) error {
 		return err
 	} */
 
-	// Save the block
-	/*
+// Save the block
+/*
 	err := w.db.SaveBlock(b)
 	if err != nil {
 		log.Error().Err(err).Int64("height", int64(b.BlockHeader.Height)).Msg("failed to persist block")
@@ -291,4 +292,4 @@ func (w Worker) HandleGenesis(block *flow.Block) error {
 	}
 	return nil
 }
- */
+*/
