@@ -1,10 +1,13 @@
 package transaction
 
 import (
+	"fmt"
+
 	"github.com/forbole/egldjuno/client"
 	db "github.com/forbole/egldjuno/db/postgresql"
 	txutils "github.com/forbole/egldjuno/modules/transaction/utils"
 	"github.com/forbole/egldjuno/modules/utils"
+	"github.com/forbole/egldjuno/types"
 	"github.com/go-co-op/gocron"
 	"github.com/rs/zerolog/log"
 )
@@ -27,5 +30,24 @@ func getNewTransactions(db *db.Db, client client.Proxy) error {
 	if err != nil {
 		return err
 	}
-	return db.SaveTxs(txs)
+
+	for _,tx:=range txs{
+		var txResults []types.SmartContractResult
+		for _,smr:=range tx.SmartContractResult{
+			fmt.Println(smr.Logs)
+			fmt.Println(smr.Hash)
+
+			txResults=append(txResults,smr)
+		}
+		err=db.SaveSmartContractResult(txResults,tx.TxHash)
+		if err!=nil{
+			return fmt.Errorf("Error when saving smart_contract)result into db:%s",err)
+		}
+	}
+
+	err= db.SaveTxs(txs)
+	if err!=nil{
+		return fmt.Errorf("Error when saving tx:%s",err)
+	}
+	return nil
 }

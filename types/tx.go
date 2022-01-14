@@ -1,5 +1,7 @@
 package types
 
+import "reflect"
+
 // Tx represents an already existing blockchain transaction
 type Txs []Tx
 type Tx struct {
@@ -20,7 +22,7 @@ type Tx struct {
 	Fee             string
 	Timestamp       int64
 	Data            string
-
+	SmartContractResult []SmartContractResult `json:"results"`
 }
 
 // Equal tells whether v and w represent the same rows
@@ -84,28 +86,34 @@ func NewTx(
 	}
 }
 
+type Action struct {
+	Category    string `json:"category"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Arguments   []byte `json:"arguments"`
+}
+
 type SmartContractResult struct { 
-	TxHash string
-	Hash string
-	Timestamp int64
-	Nonce int64
-	GasLimit int64
-	GasPrice int64
-	Value string
-	Sender string
-	Receiver string
-	RelayedValue string
-	Data string
-	PrevTxHash string
-	OriginalTxHash string
-	CallType string
-	Logs string
+		Hash           string `json:"hash"`
+		Timestamp      int    `json:"timestamp"`
+		Nonce          int    `json:"nonce"`
+		GasLimit       int    `json:"gasLimit"`
+		GasPrice       int    `json:"gasPrice"`
+		Value          string `json:"value"`
+		Sender         string `json:"sender"`
+		Receiver       string `json:"receiver"`
+		Data           string `json:"data"`
+		PrevTxHash     string `json:"prevTxHash"`
+		OriginalTxHash string `json:"originalTxHash"`
+		CallType       string `json:"callType"`
+		RelayedValue *string `json:"relayedValue"`
+	Logs []byte `json:"logs"`
+	ReturnMessage []byte `json:"returnMessage"`
   }
   
   // Equal tells whether v and w represent the same rows
   func (v SmartContractResult) Equal(w SmartContractResult)bool{
-	return v.TxHash==w.TxHash && 
-  v.Hash==w.Hash && 
+	return v.Hash==w.Hash && 
   v.Timestamp==w.Timestamp && 
   v.Nonce==w.Nonce && 
   v.GasLimit==w.GasLimit && 
@@ -118,16 +126,17 @@ type SmartContractResult struct {
   v.PrevTxHash==w.PrevTxHash && 
   v.OriginalTxHash==w.OriginalTxHash && 
   v.CallType==w.CallType && 
-  v.Logs==w.Logs }
+  reflect.DeepEqual(v.Logs,w.Logs) &&
+reflect.DeepEqual(v.ReturnMessage,w.ReturnMessage) }
   
    // SmartContractResult allows to build a new SmartContractResult
   func NewSmartContractResult( 
 	txHash string,
 	hash string,
-	timestamp int64,
-	nonce int64,
-	gasLimit int64,
-	gasPrice int64,
+	timestamp int,
+	nonce int,
+	gasLimit int,
+	gasPrice int,
 	value string,
 	sender string,
 	receiver string,
@@ -136,9 +145,9 @@ type SmartContractResult struct {
 	prevTxHash string,
 	originalTxHash string,
 	callType string,
-	logs string) SmartContractResult{
+	logs []byte,
+	returnMessage []byte) SmartContractResult{
    return SmartContractResult{
-   TxHash:txHash,
    Hash:hash,
    Timestamp:timestamp,
    Nonce:nonce,
@@ -147,11 +156,12 @@ type SmartContractResult struct {
    Value:value,
    Sender:sender,
    Receiver:receiver,
-   RelayedValue:relayedValue,
+   RelayedValue:&relayedValue,
    Data:data,
    PrevTxHash:prevTxHash,
    OriginalTxHash:originalTxHash,
    CallType:callType,
    Logs:logs,
+   ReturnMessage: returnMessage,
   }
   }

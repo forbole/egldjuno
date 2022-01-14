@@ -1,5 +1,5 @@
 CREATE TABLE tx
-(  tx_hash TEXT  NOT NULL ,
+(  tx_hash TEXT  NOT NULL PRIMARY KEY,
   gas_limit BIGINT NOT NULL ,
   gas_price BIGINT NOT NULL ,
   gas_used BIGINT NOT NULL ,
@@ -16,22 +16,23 @@ CREATE TABLE tx
   fee TEXT  NOT NULL ,
   timestamp BIGINT NOT NULL ,
   data TEXT  NOT NULL 
+  
 );
 
 CREATE TABLE smart_contract_result
-(  tx_hash BIGINT  NOT NULL ,
-  hash BIGINT  NOT NULL ,
-  timestamp TEXT NOT NULL ,
-  nonce TEXT NOT NULL ,
-  gas_limit TEXT NOT NULL ,
-  gas_price TEXT NOT NULL ,
-  value BIGINT  NOT NULL ,
-  sender BIGINT  NOT NULL ,
-  receiver BIGINT  NOT NULL ,
-  relayed_value BIGINT  NOT NULL ,
-  data BIGINT  NOT NULL ,
-  prev_tx_hash BIGINT  NOT NULL ,
-  original_tx_hash BIGINT  NOT NULL ,
-  call_type BIGINT  NOT NULL ,
-  logs BIGINT  NOT NULL
+(  tx_hash TEXT  NOT NULL ,
+  hash TEXT  NOT NULL ,
+  timestamp BIGINT NOT NULL ,
+  nonce BIGINT NOT NULL ,
+  gas_limit BIGINT NOT NULL ,
+  gas_price BIGINT NOT NULL ,
+  value TEXT  NOT NULL ,
+  sender TEXT  NOT NULL ,
+  receiver TEXT  NOT NULL ,
+  relayed_value TEXT ,
+  data TEXT  NOT NULL ,
+  prev_tx_hash TEXT  NOT NULL ,
+  original_tx_hash TEXT  NOT NULL ,
+  call_type TEXT  NOT NULL ,
+  logs JSONB 
 );

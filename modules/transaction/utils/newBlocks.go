@@ -35,12 +35,15 @@ func GetNewTransactions(client client.Proxy) ([]types.Tx,error){
 		if err!=nil{
 			return nil,err
 		}
-		mainTxs[i]=decodeTx(jsonstr)
-		
-	}
+		var maintx types.Tx
+		err=json.Unmarshal(jsonstr,&maintx)
+		if err!=nil{
 
-	if err!=nil{
-		return nil,err
+			//Error when unmarshal tx type:illegal base64 data at input byte 3"???
+			return nil,fmt.Errorf("Error when unmarshal tx type:%s",err)
+		}
+		mainTxs[i]=maintx
+		
 	}
 	return mainTxs,nil
 }
@@ -70,3 +73,4 @@ func decodeTx(jsonstr []byte)types.Tx{
 	)
 	return tx
 }
+
