@@ -34,5 +34,5 @@ CREATE TABLE smart_contract_result
   prev_tx_hash TEXT  NOT NULL ,
   original_tx_hash TEXT  NOT NULL ,
   call_type TEXT  NOT NULL ,
-  logs JSONB 
+  logs JSONB NOT NULL DEFAULT '[]'::JSONB
 );
