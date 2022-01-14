@@ -31,23 +31,23 @@ func getNewTransactions(db *db.Db, client client.Proxy) error {
 		return err
 	}
 
-	for _,tx:=range txs{
+	for _, tx := range txs {
 		var txResults []types.SmartContractResult
-		for _,smr:=range tx.SmartContractResult{
+		for _, smr := range tx.SmartContractResult {
 			fmt.Println(smr.Logs)
 			fmt.Println(smr.Hash)
 
-			txResults=append(txResults,smr)
+			txResults = append(txResults, smr)
 		}
-		err=db.SaveSmartContractResult(txResults,tx.TxHash)
-		if err!=nil{
-			return fmt.Errorf("Error when saving smart_contract)result into db:%s",err)
+		err = db.SaveSmartContractResult(txResults, tx.TxHash)
+		if err != nil {
+			return fmt.Errorf("Error when saving smart_contract)result into db:%s", err)
 		}
 	}
 
-	err= db.SaveTxs(txs)
-	if err!=nil{
-		return fmt.Errorf("Error when saving tx:%s",err)
+	err = db.SaveTxs(txs)
+	if err != nil {
+		return fmt.Errorf("Error when saving tx:%s", err)
 	}
 	return nil
 }

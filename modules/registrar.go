@@ -15,7 +15,6 @@ import (
 	"github.com/forbole/egldjuno/modules/consensus"
 	"github.com/forbole/egldjuno/modules/telemetry"
 	"github.com/forbole/egldjuno/modules/transaction"
-
 )
 
 var (
@@ -47,6 +46,5 @@ func (r *Registrar) BuildModules(
 		consensus.NewModule(r.parser, *cp, encodingConfig, bigDipperBd),
 		telemetry.NewModule(cfg, r.parser, *cp, encodingConfig, bigDipperBd),
 		transaction.NewModule(r.parser, *cp, encodingConfig, bigDipperBd),
-
 	}
 }

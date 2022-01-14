@@ -7,8 +7,6 @@ import (
 	"github.com/onflow/flow-go-sdk"
 )
 
-
-
 type Event struct {
 	//Transaction Result Event
 	Height           int

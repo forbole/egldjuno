@@ -59,7 +59,7 @@ var CosmosMessageAddressesParser = JoinMessageParsers(
 // DefaultMessagesParser represents the default messages parser that simply returns all account that
 // mutate the state by the transaction
 func DefaultMessagesParser(_ codec.Marshaler, tx types.Tx) ([]string, error) {
-	return []string{tx.Sender,tx.Receiver}, nil
+	return []string{tx.Sender, tx.Receiver}, nil
 }
 
 /*

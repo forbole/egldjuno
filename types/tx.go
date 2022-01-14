@@ -5,23 +5,23 @@ import "reflect"
 // Tx represents an already existing blockchain transaction
 type Txs []Tx
 type Tx struct {
-	TxHash          string
-	GasLimit        int64
-	GasPrice        int64
-	GasUsed         int64
-	MiniBlockHash   string
-	Nonce           int64
-	Receiver        string
-	ReceiverShard   int64
-	Round           int64
-	Sender          string
-	SenderShard     int64
-	Signature       string
-	Status          string
-	Value           string
-	Fee             string
-	Timestamp       int64
-	Data            string
+	TxHash              string
+	GasLimit            int64
+	GasPrice            int64
+	GasUsed             int64
+	MiniBlockHash       string
+	Nonce               int64
+	Receiver            string
+	ReceiverShard       int64
+	Round               int64
+	Sender              string
+	SenderShard         int64
+	Signature           string
+	Status              string
+	Value               string
+	Fee                 string
+	Timestamp           int64
+	Data                string
 	SmartContractResult []SmartContractResult `json:"results"`
 }
 
@@ -43,7 +43,7 @@ func (v Tx) Equal(w Tx) bool {
 		v.Value == w.Value &&
 		v.Fee == w.Fee &&
 		v.Timestamp == w.Timestamp &&
-		v.Data == w.Data 
+		v.Data == w.Data
 }
 
 // Transaction allows to build a new Transaction
@@ -66,23 +66,23 @@ func NewTx(
 	timestamp int64,
 	data string) Tx {
 	return Tx{
-		TxHash:          txHash,
-		GasLimit:        gasLimit,
-		GasPrice:        gasPrice,
-		GasUsed:         gasUsed,
-		MiniBlockHash:   miniBlockHash,
-		Nonce:           nonce,
-		Receiver:        receiver,
-		ReceiverShard:   receiverShard,
-		Round:           round,
-		Sender:          sender,
-		SenderShard:     senderShard,
-		Signature:       signature,
-		Status:          status,
-		Value:           value,
-		Fee:             fee,
-		Timestamp:       timestamp,
-		Data:            data,
+		TxHash:        txHash,
+		GasLimit:      gasLimit,
+		GasPrice:      gasPrice,
+		GasUsed:       gasUsed,
+		MiniBlockHash: miniBlockHash,
+		Nonce:         nonce,
+		Receiver:      receiver,
+		ReceiverShard: receiverShard,
+		Round:         round,
+		Sender:        sender,
+		SenderShard:   senderShard,
+		Signature:     signature,
+		Status:        status,
+		Value:         value,
+		Fee:           fee,
+		Timestamp:     timestamp,
+		Data:          data,
 	}
 }
 
@@ -93,44 +93,45 @@ type Action struct {
 	Arguments   []byte `json:"arguments"`
 }
 
-type SmartContractResult struct { 
-		Hash           string `json:"hash"`
-		Timestamp      int    `json:"timestamp"`
-		Nonce          int    `json:"nonce"`
-		GasLimit       int    `json:"gasLimit"`
-		GasPrice       int    `json:"gasPrice"`
-		Value          string `json:"value"`
-		Sender         string `json:"sender"`
-		Receiver       string `json:"receiver"`
-		Data           string `json:"data"`
-		PrevTxHash     string `json:"prevTxHash"`
-		OriginalTxHash string `json:"originalTxHash"`
-		CallType       string `json:"callType"`
-		RelayedValue *string `json:"relayedValue"`
-	Logs []byte `json:"logs"`
-	ReturnMessage []byte `json:"returnMessage"`
-  }
-  
-  // Equal tells whether v and w represent the same rows
-  func (v SmartContractResult) Equal(w SmartContractResult)bool{
-	return v.Hash==w.Hash && 
-  v.Timestamp==w.Timestamp && 
-  v.Nonce==w.Nonce && 
-  v.GasLimit==w.GasLimit && 
-  v.GasPrice==w.GasPrice && 
-  v.Value==w.Value && 
-  v.Sender==w.Sender && 
-  v.Receiver==w.Receiver && 
-  v.RelayedValue==w.RelayedValue && 
-  v.Data==w.Data && 
-  v.PrevTxHash==w.PrevTxHash && 
-  v.OriginalTxHash==w.OriginalTxHash && 
-  v.CallType==w.CallType && 
-  reflect.DeepEqual(v.Logs,w.Logs) &&
-reflect.DeepEqual(v.ReturnMessage,w.ReturnMessage) }
-  
-   // SmartContractResult allows to build a new SmartContractResult
-  func NewSmartContractResult( 
+type SmartContractResult struct {
+	Hash           string  `json:"hash"`
+	Timestamp      int     `json:"timestamp"`
+	Nonce          int     `json:"nonce"`
+	GasLimit       int     `json:"gasLimit"`
+	GasPrice       int     `json:"gasPrice"`
+	Value          string  `json:"value"`
+	Sender         string  `json:"sender"`
+	Receiver       string  `json:"receiver"`
+	Data           string  `json:"data"`
+	PrevTxHash     string  `json:"prevTxHash"`
+	OriginalTxHash string  `json:"originalTxHash"`
+	CallType       string  `json:"callType"`
+	RelayedValue   *string `json:"relayedValue"`
+	Logs           []byte  `json:"logs"`
+	ReturnMessage  []byte  `json:"returnMessage"`
+}
+
+// Equal tells whether v and w represent the same rows
+func (v SmartContractResult) Equal(w SmartContractResult) bool {
+	return v.Hash == w.Hash &&
+		v.Timestamp == w.Timestamp &&
+		v.Nonce == w.Nonce &&
+		v.GasLimit == w.GasLimit &&
+		v.GasPrice == w.GasPrice &&
+		v.Value == w.Value &&
+		v.Sender == w.Sender &&
+		v.Receiver == w.Receiver &&
+		v.RelayedValue == w.RelayedValue &&
+		v.Data == w.Data &&
+		v.PrevTxHash == w.PrevTxHash &&
+		v.OriginalTxHash == w.OriginalTxHash &&
+		v.CallType == w.CallType &&
+		reflect.DeepEqual(v.Logs, w.Logs) &&
+		reflect.DeepEqual(v.ReturnMessage, w.ReturnMessage)
+}
+
+// SmartContractResult allows to build a new SmartContractResult
+func NewSmartContractResult(
 	txHash string,
 	hash string,
 	timestamp int,
@@ -146,22 +147,22 @@ reflect.DeepEqual(v.ReturnMessage,w.ReturnMessage) }
 	originalTxHash string,
 	callType string,
 	logs []byte,
-	returnMessage []byte) SmartContractResult{
-   return SmartContractResult{
-   Hash:hash,
-   Timestamp:timestamp,
-   Nonce:nonce,
-   GasLimit:gasLimit,
-   GasPrice:gasPrice,
-   Value:value,
-   Sender:sender,
-   Receiver:receiver,
-   RelayedValue:&relayedValue,
-   Data:data,
-   PrevTxHash:prevTxHash,
-   OriginalTxHash:originalTxHash,
-   CallType:callType,
-   Logs:logs,
-   ReturnMessage: returnMessage,
-  }
-  }
+	returnMessage []byte) SmartContractResult {
+	return SmartContractResult{
+		Hash:           hash,
+		Timestamp:      timestamp,
+		Nonce:          nonce,
+		GasLimit:       gasLimit,
+		GasPrice:       gasPrice,
+		Value:          value,
+		Sender:         sender,
+		Receiver:       receiver,
+		RelayedValue:   &relayedValue,
+		Data:           data,
+		PrevTxHash:     prevTxHash,
+		OriginalTxHash: originalTxHash,
+		CallType:       callType,
+		Logs:           logs,
+		ReturnMessage:  returnMessage,
+	}
+}

@@ -10,49 +10,49 @@ import (
 	"github.com/forbole/egldjuno/client"
 )
 
-func GetNewTransactions(client client.Proxy) ([]types.Tx,error){
-	txsParams:=map[string]string{
-		"size":"25",
-		"fields":"txHash",
+func GetNewTransactions(client client.Proxy) ([]types.Tx, error) {
+	txsParams := map[string]string{
+		"size":   "25",
+		"fields": "txHash",
 	}
-	txHashesRaw,err:=client.RestRequestGet("transactions", txsParams)
-	if err!=nil{
-		return nil,err
+	txHashesRaw, err := client.RestRequestGet("transactions", txsParams)
+	if err != nil {
+		return nil, err
 	}
 	type txHashes []struct {
 		TxHash string `json:"txHash"`
 	}
 	var txhash txHashes
-	err=json.Unmarshal(txHashesRaw,&txhash)
-	if err!=nil{
-		return nil,err
+	err = json.Unmarshal(txHashesRaw, &txhash)
+	if err != nil {
+		return nil, err
 	}
 
-	mainTxs:=make([]types.Tx,25)
-	for i,tx:=range txhash{
+	mainTxs := make([]types.Tx, 25)
+	for i, tx := range txhash {
 		fmt.Println(tx)
-		jsonstr,err:=client.RestRequestGet(fmt.Sprintf("transactions/%s",tx.TxHash),nil)
-		if err!=nil{
-			return nil,err
+		jsonstr, err := client.RestRequestGet(fmt.Sprintf("transactions/%s", tx.TxHash), nil)
+		if err != nil {
+			return nil, err
 		}
 		var maintx types.Tx
-		err=json.Unmarshal(jsonstr,&maintx)
-		if err!=nil{
+		err = json.Unmarshal(jsonstr, &maintx)
+		if err != nil {
 
 			//Error when unmarshal tx type:illegal base64 data at input byte 3"???
-			return nil,fmt.Errorf("Error when unmarshal tx type:%s",err)
+			return nil, fmt.Errorf("Error when unmarshal tx type:%s", err)
 		}
-		mainTxs[i]=maintx
-		
+		mainTxs[i] = maintx
+
 	}
-	return mainTxs,nil
+	return mainTxs, nil
 }
 
 // decodeTx Get a json str from transactions/{hash} endpoint and get the data that exist on every tx
-func decodeTx(jsonstr []byte)types.Tx{
-	jsStr:=string(jsonstr)
+func decodeTx(jsonstr []byte) types.Tx {
+	jsStr := string(jsonstr)
 	fmt.Println(jsStr)
-	tx:=types.NewTx(
+	tx := types.NewTx(
 		gjson.Get(jsStr, "txHash").String(),
 		gjson.Get(jsStr, "gasLimit").Int(),
 		gjson.Get(jsStr, "gasPrice").Int(),
@@ -73,4 +73,3 @@ func decodeTx(jsonstr []byte)types.Tx{
 	)
 	return tx
 }
-

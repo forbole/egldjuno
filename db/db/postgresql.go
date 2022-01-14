@@ -97,7 +97,6 @@ func (db *Database) SaveBlock(block []types.Block) error {
 	return nil
 }
 
-
 // HasValidator implements db.Database
 func (db *Database) HasValidator(addr string) (bool, error) {
 	var res bool
@@ -179,7 +178,6 @@ func (db *Database) SaveCommitSignatures(signatures []*types.CommitSig) error {
 	_, err := db.Sql.Exec(stmt, sparams...)
 	return err
 }
-
 
 // Close implements db.Database
 func (db *Database) Close() {
@@ -296,25 +294,24 @@ func (db *Database) SaveTransactionResult(transactionResult []types.TransactionR
 }
 
 func (db *Database) SaveTxs(transaction types.Txs) error {
-    stmt:= `INSERT INTO tx(tx_hash,gas_limit,gas_price,gas_used,mini_block_hash,nonce,receiver,receiver_shard,round,sender,sender_shard,signature,status,value,fee,timestamp,data) VALUES `
+	stmt := `INSERT INTO tx(tx_hash,gas_limit,gas_price,gas_used,mini_block_hash,nonce,receiver,receiver_shard,round,sender,sender_shard,signature,status,value,fee,timestamp,data) VALUES `
 
-    var params []interface{}
+	var params []interface{}
 
-	  for i, rows := range transaction{
-      ai := i * 20
-      stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1,ai+2,ai+3,ai+4,ai+5,ai+6,ai+7,ai+8,ai+9,ai+10,ai+11,ai+12,ai+13,ai+14,ai+15,ai+16,ai+17)
-      
-      params = append(params,rows.TxHash,rows.GasLimit,rows.GasPrice,rows.GasUsed,rows.MiniBlockHash,rows.Nonce,rows.Receiver,rows.ReceiverShard,rows.Round,rows.Sender,rows.SenderShard,rows.Signature,rows.Status,rows.Value,rows.Fee,rows.Timestamp,rows.Data)
+	for i, rows := range transaction {
+		ai := i * 20
+		stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1, ai+2, ai+3, ai+4, ai+5, ai+6, ai+7, ai+8, ai+9, ai+10, ai+11, ai+12, ai+13, ai+14, ai+15, ai+16, ai+17)
 
-    }
-	  stmt = stmt[:len(stmt)-1]
-    stmt += ` ON CONFLICT DO NOTHING` 
+		params = append(params, rows.TxHash, rows.GasLimit, rows.GasPrice, rows.GasUsed, rows.MiniBlockHash, rows.Nonce, rows.Receiver, rows.ReceiverShard, rows.Round, rows.Sender, rows.SenderShard, rows.Signature, rows.Status, rows.Value, rows.Fee, rows.Timestamp, rows.Data)
 
-    _, err := db.Sql.Exec(stmt, params...)
-    if err != nil {
-      return err
-    }
+	}
+	stmt = stmt[:len(stmt)-1]
+	stmt += ` ON CONFLICT DO NOTHING`
 
-    return nil 
-    }
-     
+	_, err := db.Sql.Exec(stmt, params...)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

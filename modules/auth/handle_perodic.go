@@ -29,4 +29,3 @@ func getNewBlocks(db *db.Db, client client.Proxy) error {
 	}
 	return db.SaveBlock(blocks)
 }
-

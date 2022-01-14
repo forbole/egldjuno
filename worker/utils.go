@@ -18,4 +18,3 @@ func findValidatorByAddr(consAddr string, vals *tmctypes.ResultValidators) *tmty
 
 	return nil
 }
-
