@@ -99,7 +99,7 @@ func (cp Proxy) RestRequestGet(endpoint string, values map[string]string) ([]byt
 }
 
 func (cp Proxy) RestRequestGetDecoded(endpoint string, values map[string]string, ptr interface{}) error {
-	bz, err := cp.restRequestGet(endpoint, values)
+	bz, err := cp.RestRequestGet(endpoint, values)
 	if err != nil {
 		return err
 	}

@@ -1,30 +1,37 @@
 package utils
 
 import (
+	"encoding/json"
 	"fmt"
 
 	"github.com/forbole/egldjuno/types"
 	"github.com/tidwall/gjson"
 
-
 	"github.com/forbole/egldjuno/client"
 )
 
 func GetNewTransactions(client client.Proxy) ([]types.Tx,error){
-	type txHash struct{
-		txHash string
-	} 
-	
-	var txHashes []txHash
 	txsParams:=map[string]string{
 		"size":"25",
 		"fields":"txHash",
 	}
-	err:=client.RestRequestGetDecoded("transactions", txsParams, &txHashes)
+	txHashesRaw,err:=client.RestRequestGet("transactions", txsParams)
+	if err!=nil{
+		return nil,err
+	}
+	type txHashes []struct {
+		TxHash string `json:"txHash"`
+	}
+	var txhash txHashes
+	err=json.Unmarshal(txHashesRaw,&txhash)
+	if err!=nil{
+		return nil,err
+	}
 
 	mainTxs:=make([]types.Tx,25)
-	for i,tx:=range txHashes{
-		jsonstr,err:=client.RestRequestGet(fmt.Sprintf("transactions/%s",tx.txHash),nil)
+	for i,tx:=range txhash{
+		fmt.Println(tx)
+		jsonstr,err:=client.RestRequestGet(fmt.Sprintf("transactions/%s",tx.TxHash),nil)
 		if err!=nil{
 			return nil,err
 		}
@@ -41,6 +48,7 @@ func GetNewTransactions(client client.Proxy) ([]types.Tx,error){
 // decodeTx Get a json str from transactions/{hash} endpoint and get the data that exist on every tx
 func decodeTx(jsonstr []byte)types.Tx{
 	jsStr:=string(jsonstr)
+	fmt.Println(jsStr)
 	tx:=types.NewTx(
 		gjson.Get(jsStr, "txHash").String(),
 		gjson.Get(jsStr, "gasLimit").Int(),

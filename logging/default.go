@@ -105,8 +105,8 @@ func (d *defaultLogger) TxError(module modules.Module, tx *types.Tx, err error) 
 	d.Error("error while handling transaction",
 		"err", err,
 		LogKeyModule, module.Name(),
-		LogKeyHeight, tx.Height,
-		LogKeyTxHash, tx.TransactionID,
+		LogKeyHeight, tx.Round,
+		LogKeyTxHash, tx.TxHash,
 	)
 }
 

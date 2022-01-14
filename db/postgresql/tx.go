@@ -12,7 +12,7 @@ func (db *Db) SaveTxs(transaction types.Txs) error {
     var params []interface{}
 
 	  for i, rows := range transaction{
-      ai := i * 20
+      ai := i * 17
       stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1,ai+2,ai+3,ai+4,ai+5,ai+6,ai+7,ai+8,ai+9,ai+10,ai+11,ai+12,ai+13,ai+14,ai+15,ai+16,ai+17)
       
       params = append(params,rows.TxHash,rows.GasLimit,rows.GasPrice,rows.GasUsed,rows.MiniBlockHash,rows.Nonce,rows.Receiver,rows.ReceiverShard,rows.Round,rows.Sender,rows.SenderShard,rows.Signature,rows.Status,rows.Value,rows.Fee,rows.Timestamp,rows.Data)
@@ -39,7 +39,6 @@ func (db *Db) SaveTxs(transaction types.Txs) error {
 		  stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1,ai+2,ai+3,ai+4,ai+5,ai+6,ai+7,ai+8,ai+9,ai+10,ai+11,ai+12,ai+13,ai+14,ai+15)
 		  
 		  params = append(params,rows.TxHash,rows.Hash,rows.Timestamp,rows.Nonce,rows.GasLimit,rows.GasPrice,rows.Value,rows.Sender,rows.Receiver,rows.RelayedValue,rows.Data,rows.PrevTxHash,rows.OriginalTxHash,rows.CallType,rows.Logs)
-	
 		}
 		  stmt = stmt[:len(stmt)-1]
 		stmt += ` ON CONFLICT DO NOTHING` 
