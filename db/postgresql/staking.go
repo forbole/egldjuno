@@ -3,8 +3,6 @@ package postgresql
 import (
 	"fmt"
 
-	"github.com/lib/pq"
-
 	"github.com/forbole/egldjuno/types"
 )
 
@@ -176,58 +174,6 @@ func (db *Db) SaveNodeTotalCommitmentWithoutDelegators(nodeTotalCommitmentWithou
 	stmt = stmt[:len(stmt)-1]
 	stmt += ` ON CONFLICT DO NOTHING`
 
-	_, err := db.Sqlx.Exec(stmt, params...)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (db *Db) SaveNodeInfosFromTable(nodeInfosFromTable []types.StakerNodeInfo, height uint64) error {
-	stmt := `INSERT INTO node_infos_from_table(id,role,networking_address,networking_key,staking_key,tokens_staked,tokens_committed,tokens_unstaking,tokens_unstaked,tokens_rewarded,delegators,delegator_i_d_counter,tokens_requested_to_unstake,initial_weight,height) VALUES `
-
-	var params []interface{}
-
-	for i, rows := range nodeInfosFromTable {
-		ai := i * 15
-		stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1, ai+2, ai+3, ai+4, ai+5, ai+6, ai+7, ai+8, ai+9, ai+10, ai+11, ai+12, ai+13, ai+14, ai+15)
-
-		params = append(params, rows.Id, rows.Role, rows.NetworkingAddress, rows.NetworkingKey, rows.StakingKey, rows.TokensStaked, rows.TokensCommitted, rows.TokensUnstaking, rows.TokensUnstaked, rows.TokensRewarded, pq.Array(rows.Delegators), rows.DelegatorIDCounter, rows.TokensRequestedToUnstake, rows.InitialWeight, height)
-
-	}
-	stmt = stmt[:len(stmt)-1]
-	stmt += ` ON CONFLICT DO NOTHING`
-
-	_, err := db.Sqlx.Exec(stmt, params...)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-func (db *Db) SaveCutPercentage(cutPercentage types.CutPercentage) error {
-	stmt := `INSERT INTO cut_percentage(cut_percentage,height) VALUES ($1,$2) ON CONFLICT DO NOTHING`
-
-	_, err := db.Sql.Exec(stmt, cutPercentage.CutPercentage, cutPercentage.Height)
-	return err
-}
-
-func (db *Db) SaveDelegatorInfo(delegatorInfo []types.DelegatorNodeInfo, height uint64) error {
-	stmt := `INSERT INTO delegator_info(id,node_id,tokens_committed,tokens_staked,tokens_unstaking,tokens_rewarded,tokens_unstaked,tokens_requested_to_unstake,height) VALUES `
-
-	var params []interface{}
-
-	for i, rows := range delegatorInfo {
-		ai := i * 9
-		stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1, ai+2, ai+3, ai+4, ai+5, ai+6, ai+7, ai+8, ai+9)
-
-		params = append(params, rows.Id, rows.NodeID, rows.TokensCommitted, rows.TokensStaked, rows.TokensUnstaking, rows.TokensRewarded, rows.TokensUnstaked, rows.TokensRequestedToUnstake, height)
-
-	}
-	stmt = stmt[:len(stmt)-1]
-	stmt += ` ON CONFLICT DO NOTHING`
 	_, err := db.Sqlx.Exec(stmt, params...)
 	if err != nil {
 		return err

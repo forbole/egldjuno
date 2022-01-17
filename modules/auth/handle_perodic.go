@@ -18,6 +18,11 @@ func RegisterPeriodicOperations(scheduler *gocron.Scheduler, db *db.Db, client c
 	}); err != nil {
 		return err
 	}
+	if _, err := scheduler.Every(1).Second().Do(func() {
+		utils.WatchMethod(func() error { return getNewAccounts(db, client) })
+	}); err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -28,4 +33,12 @@ func getNewBlocks(db *db.Db, client client.Proxy) error {
 		return err
 	}
 	return db.SaveBlock(blocks)
+}
+
+func getNewAccounts(db *db.Db, client client.Proxy) error {
+	accounts, err := authutils.GetNewAccounts(client)
+	if err != nil {
+		return err
+	}
+	return db.SaveAccount(accounts)
 }
