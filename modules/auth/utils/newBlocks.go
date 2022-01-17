@@ -28,16 +28,16 @@ func GetNewAccounts(client client.Proxy) ([]types.Account, error) {
 	var addresses AddressRow
 	err := client.RestRequestGetDecoded("accounts", txsParams, &addresses)
 
-	accounts:=make([]types.Account,25)
+	accounts := make([]types.Account, 25)
 
-	for i,a:=range addresses{
-		fmt.Println(fmt.Sprintf("Address:%s",a.Address))
+	for i, a := range addresses {
+		fmt.Println(fmt.Sprintf("Address:%s", a.Address))
 		var account types.Account
-		err = client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s",a.Address), nil, &account)
-		if err!=nil{
-			return nil,err
+		err = client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s", a.Address), nil, &account)
+		if err != nil {
+			return nil, err
 		}
-		accounts[i]=account
+		accounts[i] = account
 
 	}
 	if err != nil {
@@ -46,38 +46,38 @@ func GetNewAccounts(client client.Proxy) ([]types.Account, error) {
 	return accounts, nil
 }
 
-func getScResults(address string,client client.Proxy) ([]types.SCResult,error){
+func getScResults(address string, client client.Proxy) ([]types.SCResult, error) {
 	var scResult []types.SCResult
-	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/sc-results",address), nil, &scResult)
-	if err!=nil{
-		return nil,err
+	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/sc-results", address), nil, &scResult)
+	if err != nil {
+		return nil, err
 	}
-	return scResult,nil
+	return scResult, nil
 }
 
-func getTokens(address string,client client.Proxy) ([]types.Token,error){
+func getTokens(address string, client client.Proxy) ([]types.Token, error) {
 	var scResult []types.Token
-	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/tokens",address), nil, &scResult)
-	if err!=nil{
-		return nil,err
+	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/tokens", address), nil, &scResult)
+	if err != nil {
+		return nil, err
 	}
-	return scResult,nil
+	return scResult, nil
 }
 
-func getNFTs(address string,client client.Proxy) ([]types.NFT,error){
+func getNFTs(address string, client client.Proxy) ([]types.NFT, error) {
 	var nfts []types.NFT
-	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/nfts?includeFlagged=true",address), nil, &nfts)
-	if err!=nil{
-		return nil,err
+	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/nfts?includeFlagged=true", address), nil, &nfts)
+	if err != nil {
+		return nil, err
 	}
-	return nfts,nil
+	return nfts, nil
 }
 
-func getContracts(address string,client client.Proxy) ([]types.NFT,error){
+func getContracts(address string, client client.Proxy) ([]types.NFT, error) {
 	var nfts []types.NFT
-	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/contracts",address), nil, &nfts)
-	if err!=nil{
-		return nil,err
+	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/contracts", address), nil, &nfts)
+	if err != nil {
+		return nil, err
 	}
-	return nfts,nil
+	return nfts, nil
 }

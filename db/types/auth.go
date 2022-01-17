@@ -1,50 +1,90 @@
 package types
 
+import "reflect"
+
 // AccountRow represents a single row of the account table
-// AccountRow represents a single row of the account table
-type AccountRow struct {
-	Address         string `db:"address"`
-	Nonce           int64  `db:"nonce"`
-	Balance         string `db:"balance"`
-	RootHash        string `db:"root_hash"`
-	TxCount         int64  `db:"tx_count"`
-	ScrCount        int64  `db:"scr_count"`
-	Shard           int64  `db:"shard"`
-	DeveloperReward string `db:"developer_reward"`
+type AccountRow struct { 
+  Address string `db:"address"`
+  Balance string `db:"balance"`
+  Nonce string `db:"nonce"`
+  Shard int `db:"shard"`
+  ScamInfo []byte `db:"scam_info"`
+  Code string `db:"code"`
+  CodeHash string `db:"code_hash"`
+  RootHash string `db:"root_hash"`
+  TxCount int `db:"tx_count"`
+  ScrCount int `db:"scr_count"`
+  Username string `db:"username"`
+  DeveloperReward string `db:"developer_reward"`
+  OwnerAddress string `db:"owner_address"`
+  DeployedAt int `db:"deployed_at"`
+  IsUpgradeable bool `db:"is_upgradeable"`
+  IsReadable bool `db:"is_readable"`
+  IsPayable bool `db:"is_payable"`
+  IsPayableBySmartContract bool `db:"is_payable_by_smart_contract"`
 }
 
-// Equal tells whether v and w represent the same rows
-func (v AccountRow) Equal(w AccountRow) bool {
-	return v.Address == w.Address &&
-		v.Nonce == w.Nonce &&
-		v.Balance == w.Balance &&
-		v.RootHash == w.RootHash &&
-		v.TxCount == w.TxCount &&
-		v.ScrCount == w.ScrCount &&
-		v.Shard == w.Shard &&
-		v.DeveloperReward == w.DeveloperReward
-}
+   // Equal tells whether v and w represent the same rows
+func (v AccountRow) Equal(w AccountRow)bool{
+  return v.Address==w.Address && 
+v.Balance==w.Balance && 
+v.Nonce==w.Nonce && 
+v.Shard==w.Shard && 
+reflect.DeepEqual(v.ScamInfo,w.ScamInfo) && 
+v.Code==w.Code && 
+v.CodeHash==w.CodeHash && 
+v.RootHash==w.RootHash && 
+v.TxCount==w.TxCount && 
+v.ScrCount==w.ScrCount && 
+v.Username==w.Username && 
+v.DeveloperReward==w.DeveloperReward && 
+v.OwnerAddress==w.OwnerAddress && 
+v.DeployedAt==w.DeployedAt && 
+v.IsUpgradeable==w.IsUpgradeable && 
+v.IsReadable==w.IsReadable && 
+v.IsPayable==w.IsPayable && 
+v.IsPayableBySmartContract==w.IsPayableBySmartContract }
 
-// AccountRow allows to build a new AccountRow
-func NewAccountRow(
-	address string,
-	nonce int64,
-	balance string,
-	rootHash string,
-	txCount int64,
-	scrCount int64,
-	shard int64,
-	developerReward string) AccountRow {
-	return AccountRow{
-		Address:         address,
-		Nonce:           nonce,
-		Balance:         balance,
-		RootHash:        rootHash,
-		TxCount:         txCount,
-		ScrCount:        scrCount,
-		Shard:           shard,
-		DeveloperReward: developerReward,
-	}
+    // AccountRow allows to build a new AccountRow
+func NewAccountRow( 
+  address string,
+  balance string,
+  nonce string,
+  shard int,
+  scamInfo []byte,
+  code string,
+  codeHash string,
+  rootHash string,
+  txCount int,
+  scrCount int,
+  username string,
+  developerReward string,
+  ownerAddress string,
+  deployedAt int,
+  isUpgradeable bool,
+  isReadable bool,
+  isPayable bool,
+  isPayableBySmartContract bool) AccountRow{
+ return AccountRow{
+ Address:address,
+ Balance:balance,
+ Nonce:nonce,
+ Shard:shard,
+ ScamInfo:scamInfo,
+ Code:code,
+ CodeHash:codeHash,
+ RootHash:rootHash,
+ TxCount:txCount,
+ ScrCount:scrCount,
+ Username:username,
+ DeveloperReward:developerReward,
+ OwnerAddress:ownerAddress,
+ DeployedAt:deployedAt,
+ IsUpgradeable:isUpgradeable,
+ IsReadable:isReadable,
+ IsPayable:isPayable,
+ IsPayableBySmartContract:isPayableBySmartContract,
+}
 }
 
 // BlockRow represents a single row of the block table

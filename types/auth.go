@@ -1,12 +1,12 @@
 package types
 
 type Account struct {
-	Address  string `json:"address"`
-	Balance  string `json:"balance"`
-	Nonce    string `json:"nonce"`
-	Shard    int    `json:"shard"`
+	Address  string 				`json:"address"`
+	Balance  string 				`json:"balance"`
+	Nonce    int 				`json:"nonce"`
+	Shard    int    				`json:"shard"`
 	ScamInfo struct {
-	} `json:"scamInfo"`
+	} 								`json:"scamInfo"`
 	Code                     string `json:"code"`
 	CodeHash                 string `json:"codeHash"`
 	RootHash                 string `json:"rootHash"`
@@ -21,6 +21,8 @@ type Account struct {
 	IsPayable                bool   `json:"isPayable"`
 	IsPayableBySmartContract bool   `json:"isPayableBySmartContract"`
 }
+
+
 
 type SCResult struct {
 	Hash           string `json:"hash"`
