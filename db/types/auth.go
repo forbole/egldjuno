@@ -168,3 +168,28 @@ func NewBlockRow(
 		MaxGasLimit:   maxGasLimit,
 	}
 }
+
+// TokenBalanceRow represents a single row of the token_balance table
+type TokenBalanceRow struct { 
+	Address string `db:"address"`
+	Identifier string `db:"identifier"`
+	Balance string `db:"balance"`
+  }
+  
+	 // Equal tells whether v and w represent the same rows
+  func (v TokenBalanceRow) Equal(w TokenBalanceRow)bool{
+	return v.Address==w.Address && 
+  v.Identifier==w.Identifier && 
+  v.Balance==w.Balance }
+  
+	  // TokenBalanceRow allows to build a new TokenBalanceRow
+  func NewTokenBalanceRow( 
+	address string,
+	identifier string,
+	balance string) TokenBalanceRow{
+   return TokenBalanceRow{
+   Address:address,
+   Identifier:identifier,
+   Balance:balance,
+  }
+  }

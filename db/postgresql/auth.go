@@ -28,3 +28,50 @@ func (db *Db) SaveAccount(account []types.Account) error {
 
 	return nil
 }
+
+func (db *Db) SaveToken(token []types.Token) error {
+    stmt:= `INSERT INTO token(identifier,name,ticker,owner,minted,burnt,decimals,is_paused,can_upgrade,can_mint,can_burn,can_change_owner,can_pause,can_freeze,can_wipe,balance) VALUES `
+
+    var params []interface{}
+
+	  for i, rows := range token{
+      ai := i * 16
+      stmt += fmt.Sprintf("($%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d,$%d),", ai+1,ai+2,ai+3,ai+4,ai+5,ai+6,ai+7,ai+8,ai+9,ai+10,ai+11,ai+12,ai+13,ai+14,ai+15,ai+16)
+      
+      params = append(params,rows.Identifier,rows.Name,rows.Ticker,rows.Owner,rows.Minted,rows.Burnt,rows.Decimals,rows.IsPaused,rows.CanUpgrade,rows.CanMint,rows.CanBurn,rows.CanChangeOwner,rows.CanPause,rows.CanFreeze,rows.CanWipe,rows.Balance)
+
+    }
+	  stmt = stmt[:len(stmt)-1]
+    stmt += ` ON CONFLICT DO NOTHING` 
+
+    _, err := db.Sqlx.Exec(stmt, params...)
+    if err != nil {
+      return err
+    }
+
+    return nil 
+    }
+     
+
+	func (db *Db) SaveTokenBalance(tokenBalance []types.Token,address string) error {
+		stmt:= `INSERT INTO token_balance(address,identifier,balance) VALUES `
+	
+		var params []interface{}
+	
+		  for i, rows := range tokenBalance{
+		  ai := i * 3
+		  stmt += fmt.Sprintf("($%d,$%d,$%d),", ai+1,ai+2,ai+3)
+		  
+		  params = append(params,address,rows.Identifier,rows.Balance)
+	
+		}
+		  stmt = stmt[:len(stmt)-1]
+		stmt += ` ON CONFLICT DO NOTHING` 
+	
+		_, err := db.Sqlx.Exec(stmt, params...)
+		if err != nil {
+		  return err
+		}
+	
+		return nil 
+	}

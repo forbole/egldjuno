@@ -3,7 +3,7 @@ CREATE TABLE account
   balance TEXT NOT NULL ,
   nonce TEXT NOT NULL ,
   shard BIGINT  NOT NULL ,
-  scam_info TEXT ,
+  scam_info JSONB ,
   code TEXT,
   code_hash TEXT ,
   root_hash TEXT NOT NULL ,
@@ -17,4 +17,10 @@ CREATE TABLE account
   is_readable TEXT  ,
   is_payable TEXT  ,
   is_payable_by_smart_contract TEXT 
+);
+
+   CREATE TABLE token_balance
+(  address TEXT NOT NULL ,
+  identifier TEXT NOT NULL ,
+  balance TEXT NOT NULL
 );

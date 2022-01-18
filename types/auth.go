@@ -44,8 +44,30 @@ type SCResult struct {
 	} `json:"logs"`
 	ReturnMessage struct {
 	} `json:"returnMessage"`
-}
-
+	}
+	type TokenBalance struct { 
+		Address string
+		Identifier string
+		Balance string
+	  }
+	  
+	  // Equal tells whether v and w represent the same rows
+	  func (v TokenBalance) Equal(w TokenBalance)bool{
+		return v.Address==w.Address && 
+	  v.Identifier==w.Identifier && 
+	  v.Balance==w.Balance }
+	  
+	   // TokenBalance allows to build a new TokenBalance
+	  func NewTokenBalance( 
+		address string,
+		identifier string,
+		balance string) TokenBalance{
+	   return TokenBalance{
+	   Address:address,
+	   Identifier:identifier,
+	   Balance:balance,
+	  }
+	  }
 type Token struct {
 	Identifier     string `json:"identifier"`
 	Name           string `json:"name"`

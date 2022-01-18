@@ -35,10 +35,10 @@ func getNewBlocks(db *db.Db, client client.Proxy) error {
 	return db.SaveBlock(blocks)
 }
 
-func getNewAccounts(db *db.Db, client client.Proxy) error {
-	accounts, err := authutils.GetNewAccounts(client)
+func getNewAccounts(database *db.Db, client client.Proxy) error {
+	accounts, err := authutils.GetNewAccounts(database,client)
 	if err != nil {
 		return err
 	}
-	return db.SaveAccount(accounts)
+	return database.SaveAccount(accounts)
 }
