@@ -7,6 +7,9 @@ import (
 )
 
 func (db *Db) SaveAccount(account []types.Account) error {
+	if len(account)==0{
+		return nil
+	}
 	stmt := `INSERT INTO account(address,nonce,balance,root_hash,tx_count,scr_count,shard,developer_reward) VALUES `
 
 	var params []interface{}
@@ -30,6 +33,9 @@ func (db *Db) SaveAccount(account []types.Account) error {
 }
 
 func (db *Db) SaveToken(token []types.Token) error {
+	if len(token)==0{
+		return nil
+	}
 	stmt := `INSERT INTO token(identifier,name,ticker,owner,minted,burnt,decimals,is_paused,can_upgrade,can_mint,can_burn,can_change_owner,can_pause,can_freeze,can_wipe,balance) VALUES `
 
 	var params []interface{}
@@ -53,6 +59,9 @@ func (db *Db) SaveToken(token []types.Token) error {
 }
 
 func (db *Db) SaveTokenBalance(tokenBalance []types.Token, address string) error {
+	if len(tokenBalance)==0{
+		return nil
+	}
 	stmt := `INSERT INTO token_balance(address,identifier,balance) VALUES `
 
 	var params []interface{}
@@ -76,6 +85,9 @@ func (db *Db) SaveTokenBalance(tokenBalance []types.Token, address string) error
 }
 
 func (db *Db) SaveAccountNft(accountNft []types.NFT, address string) error {
+	if len(accountNft)==0{
+		return nil
+	}
 	stmt := `INSERT INTO account_nft(address,identifier) VALUES `
 
 	var params []interface{}
@@ -99,6 +111,10 @@ func (db *Db) SaveAccountNft(accountNft []types.NFT, address string) error {
 }
 
 func (db *Db) SaveAccountContract(accountContract []types.AccountContract, address string) error {
+	if len(accountContract)==0{
+		return nil
+	}
+	
 	stmt := `INSERT INTO account_contract(address,contract_address,deploy_tx_hash,timestamp) VALUES `
 
 	var params []interface{}
