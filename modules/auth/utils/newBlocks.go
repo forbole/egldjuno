@@ -7,7 +7,6 @@ import (
 
 	"github.com/forbole/egldjuno/client"
 	db "github.com/forbole/egldjuno/db/postgresql"
-
 )
 
 func GetNewBlocks(client client.Proxy) ([]types.Block, error) {
@@ -20,79 +19,82 @@ func GetNewBlocks(client client.Proxy) ([]types.Block, error) {
 }
 
 func GetNewAccounts(db *db.Db, client client.Proxy) error {
-	
-	size:=25
-	addresses,err:=getAccountsList(client,size)
-	if err!=nil{
-		return err
-	}
 
-	accountsList := make([]types.Account, size)
-	var scResultsList []types.SCResult
-
-	for i, a := range addresses {
-		fmt.Println(fmt.Sprintf("Address:%s", a))
-		account,err:=getAccountDetails(a,client)
-		if err!=nil{
-			return err
-		}
-		err=db.SaveAccount([]types.Account{*account})
-
-		tokens,err:=getTokensBalance(a,client)
-		if err!=nil{
-			return err
-		}
-
-		err=db.SaveTokenBalance(tokens,a)
-		if err!=nil{
-			return err
-		}
-
-		nfts,err:=getNFTs(a,client)
-		if err!=nil{
-			return err
-		}
-
-		contracts,err:=getContracts(a,client)
-		if err!=nil{
-			return err
-		}
-
-	}
-	err=db.SaveAccount(accountsList)
+	size := 25
+	addresses, err := getAccountsList(client, size)
 	if err != nil {
 		return err
+	}
+
+	for _, a := range addresses {
+		fmt.Println(fmt.Sprintf("Address:%s", a))
+		account, err := getAccountDetails(a, client)
+		if err != nil {
+			return err
+		}
+		err = db.SaveAccount([]types.Account{*account})
+
+		tokens, err := getTokensBalance(a, client)
+		if err != nil {
+			return err
+		}
+
+		err = db.SaveTokenBalance(tokens, a)
+		if err != nil {
+			return err
+		}
+
+		nfts, err := getNFTs(a, client)
+		if err != nil {
+			return err
+		}
+
+		err = db.SaveAccountNft(nfts, account.Address)
+		if err != nil {
+			return err
+		}
+
+		contracts, err := getContracts(a, client)
+		if err != nil {
+			return err
+		}
+
+		err = db.SaveAccountContract(contracts, a)
+		if err != nil {
+			return err
+		}
+
 	}
 	return nil
 }
 
-func getAccountsList(client client.Proxy,size int)([]string,error){
+func getAccountsList(client client.Proxy, size int) ([]string, error) {
 	txsParams := map[string]string{
 		"size":   string(size),
 		"fields": "address",
 	}
-	 type AddressRow []struct {
+	type AddressRow []struct {
 		Address string `json:"address"`
-	} 
+	}
 	var addresses AddressRow
 	err := client.RestRequestGetDecoded("accounts", txsParams, &addresses)
-	if err!=nil{
-		return nil,err
+	if err != nil {
+		return nil, err
 	}
-	returnAddresses:=make([]string,25)
-	for i,a:=range addresses{
-		returnAddresses[i]=a.Address
+	returnAddresses := make([]string, 25)
+	for i, a := range addresses {
+		returnAddresses[i] = a.Address
 	}
-	return returnAddresses,nil
+	return returnAddresses, nil
 }
 
-func getAccountDetails(address string,client client.Proxy)(*types.Account,error){
+func getAccountDetails(address string, client client.Proxy) (*types.Account, error) {
 	var account types.Account
 	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s", address), nil, &account)
 	if err != nil {
 		return nil, err
 	}
-	return &account,nil
+	return &account, nil
 }
 
 func getScResults(address string, client client.Proxy) ([]types.SCResult, error) {
@@ -122,11 +124,11 @@ func getNFTs(address string, client client.Proxy) ([]types.NFT, error) {
 	return nfts, nil
 }
 
-func getContracts(address string, client client.Proxy) ([]types.NFT, error) {
-	var nfts []types.NFT
-	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/contracts", address), nil, &nfts)
+func getContracts(address string, client client.Proxy) ([]types.AccountContract, error) {
+	var contracts []types.AccountContract
+	err := client.RestRequestGetDecoded(fmt.Sprintf("accounts/%s/contracts", address), nil, &contracts)
 	if err != nil {
 		return nil, err
 	}
-	return nfts, nil
+	return contracts, nil
 }

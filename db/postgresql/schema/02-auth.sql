@@ -24,3 +24,15 @@ CREATE TABLE account
   identifier TEXT NOT NULL ,
   balance TEXT NOT NULL
 );
+
+CREATE TABLE account_nft
+(  address TEXT NOT NULL ,
+  identifier TEXT NOT NULL
+);
+
+CREATE TABLE account_contract
+(  address TEXT NOT NULL ,
+  contract_address TEXT NOT NULL ,
+  deploy_tx_hash TEXT NOT NULL ,
+  timestamp BIGINT  NOT NULL
+);

@@ -1,12 +1,12 @@
 package types
 
 type Account struct {
-	Address  string 				`json:"address"`
-	Balance  string 				`json:"balance"`
-	Nonce    int 				`json:"nonce"`
-	Shard    int    				`json:"shard"`
+	Address  string `json:"address"`
+	Balance  string `json:"balance"`
+	Nonce    int    `json:"nonce"`
+	Shard    int    `json:"shard"`
 	ScamInfo struct {
-	} 								`json:"scamInfo"`
+	} `json:"scamInfo"`
 	Code                     string `json:"code"`
 	CodeHash                 string `json:"codeHash"`
 	RootHash                 string `json:"rootHash"`
@@ -21,8 +21,6 @@ type Account struct {
 	IsPayable                bool   `json:"isPayable"`
 	IsPayableBySmartContract bool   `json:"isPayableBySmartContract"`
 }
-
-
 
 type SCResult struct {
 	Hash           string `json:"hash"`
@@ -44,30 +42,32 @@ type SCResult struct {
 	} `json:"logs"`
 	ReturnMessage struct {
 	} `json:"returnMessage"`
+}
+type TokenBalance struct {
+	Address    string
+	Identifier string
+	Balance    string
+}
+
+// Equal tells whether v and w represent the same rows
+func (v TokenBalance) Equal(w TokenBalance) bool {
+	return v.Address == w.Address &&
+		v.Identifier == w.Identifier &&
+		v.Balance == w.Balance
+}
+
+// TokenBalance allows to build a new TokenBalance
+func NewTokenBalance(
+	address string,
+	identifier string,
+	balance string) TokenBalance {
+	return TokenBalance{
+		Address:    address,
+		Identifier: identifier,
+		Balance:    balance,
 	}
-	type TokenBalance struct { 
-		Address string
-		Identifier string
-		Balance string
-	  }
-	  
-	  // Equal tells whether v and w represent the same rows
-	  func (v TokenBalance) Equal(w TokenBalance)bool{
-		return v.Address==w.Address && 
-	  v.Identifier==w.Identifier && 
-	  v.Balance==w.Balance }
-	  
-	   // TokenBalance allows to build a new TokenBalance
-	  func NewTokenBalance( 
-		address string,
-		identifier string,
-		balance string) TokenBalance{
-	   return TokenBalance{
-	   Address:address,
-	   Identifier:identifier,
-	   Balance:balance,
-	  }
-	  }
+}
+
 type Token struct {
 	Identifier     string `json:"identifier"`
 	Name           string `json:"name"`
@@ -116,7 +116,7 @@ type NFT struct {
 	Ticker  string `json:"ticker"`
 }
 
-type Contract struct {
+type AccountContract struct {
 	Address      string `json:"address"`
 	DeployTxHash string `json:"deployTxHash"`
 	Timestamp    int    `json:"timestamp"`
